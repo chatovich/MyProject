@@ -22,15 +22,15 @@
             <element name="perimeter" type="double" />
             <element name="volume" type="double" />
             <element name="squareOfConstruction" type="double" />
-            <element name="aperture" type="tns:Aperture" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="aperture" type="tns:Aperture" minOccurs="1" maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <complexType name="Aperture">
         <sequence>
+            <element name="typeOfAperture" type="string" />
             <element name="width" type="double" />
             <element name="height" type="double" />
             <element name="count" type="integer" />
-            <element name="typeOfAperture" type="string" />
             <element name="squareOfAperture" type="double" />
         </sequence>
     </complexType>
