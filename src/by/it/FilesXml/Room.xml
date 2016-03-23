@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Каждый документ начинается декларацией (версия, кодировка - как минимум) -->
+<rooms>                 <!-- первый тег - корневой элемент. ОН ТОЛЬКО ОДИН -->
+    <room>
+        <position>1</position>
+        <name>Ivanov Alexander</name>
+        <square>Ivanov Alexander</square>       <!-- &(&amp;) '(&apos;) "(&quot;) -->
+        <height>&quot;M&amp;M&apos;s&quot;</height> <!-- это ник "M&M's"  -->
+        <perimeter>4586954</perimeter>
+        <volume>4586954</volume>
+        <squareOfConstruction>4586954</squareOfConstruction>
+        <aperture>
+            <width>Belarus</width>
+            <height>Minsk</height>
+            <count>Lenina 3</count>
+            <typeOfAperture>Belarus</typeOfAperture>
+            <squareOfAperture>Minsk</squareOfAperture>
+        </aperture>
+    </room>
+</rooms>
