@@ -29,4 +29,5 @@ public class Aperture {
         this.typeOfAperture=name;
         squareOfAperture=Double.valueOf(square);//площадь проема
     }
+
 }
