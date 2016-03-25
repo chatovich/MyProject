@@ -37,7 +37,7 @@ public class FindRoomParametresB {
     /**
      * Функция нахождения коэффициента К
      */
-    public void findCoefficientK(){//используется логарифм по основании 10
+    public void findCoefficientK(){//коэффициент необходим для конечного вычисления коэффициента В
         if (myRoom.ventilationParameter<=0.03){
             myRoom.coefficientK=2.31*pow(myRoom.ventilationParameter,0.84);
         }else if (myRoom.ventilationParameter>0.03){
@@ -47,8 +47,34 @@ public class FindRoomParametresB {
     /**
      * Функция нахождения коэффициента B
      */
-    public void findCoefficientB(){//в качестве общей площади участка размещения пожарной нагрузки используется площадь помещения
+    public void findCoefficientB(){
         myRoom.coefficientB=((myRoom.square*myRoom.coefficientK)/(myRoom.generalSquareOfApertures*(sqrt(myRoom.reducedHeightOfApertures))));
     }
-
+    /**
+     * Функция нахождения коэффициента С
+     */
+    public void findCoefficientС(){
+        myRoom.selectedСs[4]*=myRoom.specifyingCoefficientС5;//нужно умножить на уточняющий коэффициент для пятого пункта
+        for (Double temp:myRoom.selectedСs)
+        myRoom.coefficientС*=temp;
+    }
+    /**
+     * Функция нахождения расчетной пожарной нагрузки
+     */
+    public void findEstimatedFireLoad(){//перемножаем коэффициенты А В С и удельную пожарную нагрузку
+        myRoom.estimatedFireLoad=myRoom.specificFireLoad*myRoom.coefficientA*myRoom.coefficientB*myRoom.coefficientС;
+    }
+    /**
+     * Функция нахождения проемности помещения
+     */
+    public void findProemnost(){
+        Double numerator = 0.0;
+        for (Aperture temp : myRoom.aperturesOfRoom) {
+            numerator += ((temp.squareOfAperture * sqrt(temp.height)) * temp.count);//сумма: высота*площадь*количество
+        }
+        if (myRoom.volume<=1000)
+            myRoom.proemnostOfRoom =numerator/(pow(myRoom.volume,0.667));//делим на объем в степени 0.667
+        else
+            myRoom.proemnostOfRoom =numerator/myRoom.square;//делим на площадь
+    }
 }
