@@ -3,9 +3,9 @@ package by.it;
 import static java.lang.Math.*;
 
 /**
- * Класс вычисления параметров помещения до коэффициента b
+ * Класс вычисления параметров расчетной пожарной нагрузки
  */
-public class FindRoomParametresB {
+public class DefinitionOfParametersOfCalculatedFireLoad1 {
     private Room myRoom;
 
     public void SetRoom(Room room){
@@ -63,18 +63,5 @@ public class FindRoomParametresB {
      */
     public void findEstimatedFireLoad(){//перемножаем коэффициенты А В С и удельную пожарную нагрузку
         myRoom.estimatedFireLoad=myRoom.specificFireLoad*myRoom.coefficientA*myRoom.coefficientB*myRoom.coefficientС;
-    }
-    /**
-     * Функция нахождения проемности помещения
-     */
-    public void findProemnost(){
-        Double numerator = 0.0;
-        for (Aperture temp : myRoom.aperturesOfRoom) {
-            numerator += ((temp.squareOfAperture * sqrt(temp.height)) * temp.count);//сумма: высота*площадь*количество
-        }
-        if (myRoom.volume<=1000)
-            myRoom.proemnostOfRoom =numerator/(pow(myRoom.volume,0.667));//делим на объем в степени 0.667
-        else
-            myRoom.proemnostOfRoom =numerator/myRoom.square;//делим на площадь
     }
 }
