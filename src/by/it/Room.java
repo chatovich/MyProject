@@ -33,13 +33,19 @@ public class Room {
     Double coefficientС;//коэффициент C (c)
     Double estimatedFireLoad;//Расчетная пожарная нагрузка(qp)
     Double proemnostOfRoom;//проемность помещения
-    Double specificCriticalAmountOfFireLoad;//удельное критическое количество пожарной нагрузки qкр.к, для кубического помещения объемом V, равным объему исследуемого помещения
+    Double specificCriticalAmountOfFireLoad;//удельное критическое количество пожарной нагрузки (qкр.к), для кубического помещения объемом V, равным объему исследуемого помещения
     Double specificValueOfFireLoad;//удельное значение пожарной нагрузки (qк)
     boolean PRN;//true - если ПРН, false - если ПРВ
     Double maximumMeanBulkTemperature;//максимальная среднеобъемная температура (Tmax)
     Double durationOfFireSurround;//характерная продолжительность объемного пожара (tп)
     Double timeReachMaximumMeanBulkTemperature;//время достижения максимального значения среднеобъемной температуры (tmax)
-    Double[] changesInMeanBulkTemperature=new Double[121];
+    Double[] changesInMeanBulkTemperature=new Double[121];//изменение среднеобъемной температуры при объемном свободно развивающемся пожаре (T) - для графика
+    Double maximumAverageTemperatureOfWallSurface;//максимальная усредненная температура поверхности стен (Twmax)
+    Double timeToReachMaximumTemperatureOfWallSurface;//время достижения максимального значения усредненной температуры поверхности стен (tmax)
+    Double[] changeInAverageTemperatureOfWalls=new Double[121];//изменение средней температуры стен (Tw) - для графика
+    Double averageMaximumTemperatureOfSlab;//максимальной усредненной температуры поверхности перекрытия (Twmax)
+    Double timeToReachMaximumTemperatureOfSlabSurface;//время достижения максимального значения усредненной температуры поверхности перекрытия (tmax)
+    Double[] changeInAverageTemperatureOfSlab=new Double[121];//изменение средней температуры поверхности перекрытия (Tw) - для графика
     /**
      * Конструктор объекта помещения с указанием объема и площадью ограждающих конструкций помещения
      */
