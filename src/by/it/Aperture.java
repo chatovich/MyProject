@@ -4,11 +4,11 @@ package by.it;
  * Класс описания проемов
  */
 public class Aperture {
+    String typeOfAperture;//тип дверь\окно\технолог.проем
     Double width;//ширина проема
     Double height;//высота проема
+    Double squareOfAperture;//площадь проема (возможен автом. расчет)
     Integer count;//количество проемов
-    String typeOfAperture;//тип дверь\окно\технолог.проем
-    Double squareOfAperture;//площадь проема
     /**
      * Конструктор объекта проема с указанием количества проемов
      */
