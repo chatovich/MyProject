@@ -43,33 +43,23 @@
 
     <xsl:template match="/rooms/room/aperture">
         <td>
-    <table width="100%" cellpadding="2" cellspacing="1">
-        <tr>    <xsl:template match="/rooms/room/aperture/typeOfAperture">
-            <td><xsl:apply-templates/></td>
-        </xsl:template></tr>
-        <tr><xsl:template match="/rooms/room/aperture/width">
-            <td><xsl:apply-templates/></td>
-        </xsl:template></tr>
-        <tr><xsl:template match="/rooms/room/aperture/height">
-            <td><xsl:apply-templates/></td>
-        </xsl:template></tr>
-        <tr>    <xsl:template match="/rooms/room/aperture/count">
-            <td><xsl:apply-templates/></td>
-        </xsl:template></tr>
-        <tr>    <xsl:template match="/rooms/room/aperture/squareOfAperture">
-            <td><xsl:apply-templates/></td>
-        </xsl:template></tr>
-    </table>
+        <tr>
+
+        </tr>
         </td>
     </xsl:template>
 
+    <xsl:template match="/rooms/room/aperture/typeOfAperture">
+        <td><xsl:apply-templates/></td>
+    </xsl:template>
 
+    <xsl:template match="/rooms/room/aperture/width">
+        <td><xsl:apply-templates/></td>
+    </xsl:template>
 
-
-
-
-
-
+    <xsl:template match="/rooms/room/aperture/height">
+        <td><xsl:apply-templates/></td>
+    </xsl:template>
 
 
 </xsl:stylesheet>

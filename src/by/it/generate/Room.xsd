@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-        targetNamespace="http://www.it-academy.by/xml/students"
-        xmlns:tns="http://www.it-academy.by/xml/students"
+        targetNamespace="http://generate.it.by"
+        xmlns:tns="http://generate.it.by"
         elementFormDefault="qualified">
     <element name="building">
         <complexType>
             <sequence>
-                <element name="specifyingCoefficientС5" type="double" default="1"/>
+                <element name="specifyingCoefficientS5" type="double" default="1"/>
                 <element name="room"
                          type="tns:Room"
                          minOccurs="1"
@@ -57,7 +57,7 @@
 
     <complexType name="ParametersCalculatedFireLoad">
         <sequence>
-            <element name="selectedСs" type="double" minOccurs="10" maxOccurs="10"/>
+            <element name="selectedSs" type="double" minOccurs="10" maxOccurs="10"/>
             <element name="specificFireLoad" type="double" />
             <element name="reducedHeightOfApertures" type="double" />
             <element name="generalSquareOfApertures" type="double" />
@@ -65,7 +65,7 @@
             <element name="coefficientK" type="double" />
             <element name="coefficientA" type="double" default="1"/>
             <element name="coefficientB" type="double" />
-            <element name="coefficientС" type="double" />
+            <element name="coefficientS" type="double" />
             <element name="estimatedFireLoad" type="double" />
         </sequence>
     </complexType>

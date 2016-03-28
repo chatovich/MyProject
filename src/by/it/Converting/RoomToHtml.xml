@@ -12,15 +12,15 @@
             <typeOfAperture>дверь (ось С; 5-6)</typeOfAperture>
             <width>1.60</width>
             <height>2.10</height>
-            <count>1</count>
             <squareOfAperture>3.36</squareOfAperture>
+            <count>1</count>
         </aperture>
         <aperture>
             <typeOfAperture>окна трапециевидные (по приведенной высоте)</typeOfAperture>
             <width>2.60</width>
             <height>7.42</height>
-            <count>2</count>
             <squareOfAperture>19.292</squareOfAperture>
+            <count>2</count>
         </aperture>
     </room>
 </rooms>

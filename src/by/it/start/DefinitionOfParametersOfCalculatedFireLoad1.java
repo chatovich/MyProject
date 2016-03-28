@@ -1,4 +1,4 @@
-package by.it;
+package by.it.start;
 
 import static java.lang.Math.*;
 
