@@ -6,6 +6,8 @@
     <element name="building">
         <complexType>
             <sequence>
+                <element name="selectedTemperatureOfRegion" type="double" />
+                <element name="coefficientSForBuild" type="double" minOccurs="4" maxOccurs="4"/>
                 <element name="specifyingCoefficientS5" type="double" default="1"/>
                 <element name="room"
                          type="tns:Room"
@@ -20,6 +22,7 @@
             <element name="commonParameters" type="tns:CommonParameters"/>
             <element name="aperture" type="tns:Aperture" minOccurs="1" maxOccurs="unbounded"/>
             <element name="parametersCalculatedFireLoad" type="tns:ParametersCalculatedFireLoad"/>
+            <element name="flammableSubstance" type="tns:FlammableSubstance" minOccurs="1" maxOccurs="unbounded"/>
             <element name="determineTheTypeOfFire" type="tns:DetermineTheTypeOfFire"/>
             <element name="integratedThermalAndTechnicalParameters" type="tns:IntegratedThermalAndTechnicalParameters"/>
         </sequence>
@@ -42,11 +45,6 @@
 
     <complexType name="DetermineTheTypeOfFire">
         <sequence>
-            <element name="amountOfCombustionAir" type="double" minOccurs="1" maxOccurs="5"/>
-            <element name="selectedFlammableSubstances" type="double" minOccurs="1" maxOccurs="5"/>
-            <element name="selectedWeightOfFlammableSubstances" type="double" minOccurs="1" maxOccurs="5"/>
-            <element name="selectedAverageSpeedBurnout" type="double" minOccurs="1" maxOccurs="5"/>
-            <element name="selectedTemperatureOfRegion" type="double" />
             <element name="proemnostOfRoom" type="double" />
             <element name="averageAmountOfCombustionAir" type="double"/>
             <element name="specificCriticalAmountOfFireLoad" type="double" />
@@ -55,9 +53,19 @@
         </sequence>
     </complexType>
 
+    <complexType name="FlammableSubstance">
+        <sequence>
+            <element name="name" type="string" />
+            <element name="amountOfCombustionAir" type="double" />
+            <element name="combustionHeat" type="double"/>
+            <element name="averageSpeedBurnout" type="double"/>
+            <element name="weight" type="double"/>
+        </sequence>
+    </complexType>
+
     <complexType name="ParametersCalculatedFireLoad">
         <sequence>
-            <element name="selectedSs" type="double" minOccurs="10" maxOccurs="10"/>
+            <element name="selectedSs" type="double" minOccurs="6" maxOccurs="6"/>
             <element name="specificFireLoad" type="double" />
             <element name="reducedHeightOfApertures" type="double" />
             <element name="generalSquareOfApertures" type="double" />
@@ -75,7 +83,7 @@
             <element name="typeOfAperture" type="string" />
             <element name="width" type="double" />
             <element name="height" type="double" />
-            <element name="count" type="integer" />
+            <element name="count" type="byte" />
             <element name="squareOfAperture" type="double" />
         </sequence>
     </complexType>

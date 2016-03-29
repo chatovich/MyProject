@@ -1,5 +1,6 @@
 package by.it.Utils;
 
+import java.io.File;
 import java.util.*;
 import javafx.application.Application;
 import javafx.beans.value.*;
@@ -11,6 +12,9 @@ import javafx.scene.chart.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jfree.chart.ChartRenderingInfo;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.entity.StandardEntityCollection;
 
 public class CurrencyChart extends Application {
     final static String[] currencies = {"RUR", "USD", "EUR"};

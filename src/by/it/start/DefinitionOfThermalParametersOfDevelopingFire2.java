@@ -29,9 +29,9 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
     public void findAverageAmountOfCombustionAir(){
         Double numerator=0.0;
         Double denominator=0.0;
-        for (int i=0;i<myRoom.selectedWeightOfFlammableSubstances.length;i++){
-            numerator+=myRoom.selectedWeightOfFlammableSubstances[i]*myRoom.amountOfCombustionAir[i];
-            denominator+=myRoom.selectedWeightOfFlammableSubstances[i];
+        for (int i = 0; i<myRoom.weight.length; i++){
+            numerator+=myRoom.weight[i]*myRoom.amountOfCombustionAir[i];
+            denominator+=myRoom.weight[i];
         }
         myRoom.averageAmountOfCombustionAir=numerator/denominator;
     }
@@ -51,8 +51,8 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
     public void findSpecificValueOfFireLoad(){
         Double numerator=0.0;
         Double denominator;
-        for (int i=0;i<myRoom.selectedFlammableSubstances.length;i++)
-            numerator+=(myRoom.selectedFlammableSubstances[i]*myRoom.selectedWeightOfFlammableSubstances[i]);
+        for (int i = 0; i<myRoom.combustionHeat.length; i++)
+            numerator+=(myRoom.combustionHeat[i]*myRoom.weight[i]);
         denominator=(((6*pow(myRoom.volume,0.667))-myRoom.generalSquareOfApertures)*13.8);
         myRoom.specificValueOfFireLoad=numerator/denominator;
         if (myRoom.specificValueOfFireLoad<myRoom.specificCriticalAmountOfFireLoad)
@@ -78,17 +78,17 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
     public void findDurationOfFireSurround(){
         Double numerator=0.0;Double denominator;
         Double firstFraction;Double secondFraction;
-        for (int i=0;i<myRoom.selectedFlammableSubstances.length;i++)
-            numerator+=(myRoom.selectedFlammableSubstances[i]*myRoom.selectedWeightOfFlammableSubstances[i]);
+        for (int i = 0; i<myRoom.combustionHeat.length; i++)
+            numerator+=(myRoom.combustionHeat[i]*myRoom.weight[i]);
         denominator=6258*myRoom.generalSquareOfApertures*sqrt(myRoom.reducedHeightOfApertures);
         firstFraction=numerator/denominator;
 
         numerator=0.0;denominator=0.0;
-        for (int i=0;i<myRoom.selectedWeightOfFlammableSubstances.length;i++)
-            numerator+=(myRoom.selectedWeightOfFlammableSubstances[i]);
+        for (int i = 0; i<myRoom.weight.length; i++)
+            numerator+=(myRoom.weight[i]);
         numerator*=2.4;
-        for (int i=0;i<myRoom.selectedWeightOfFlammableSubstances.length;i++)
-            denominator+=(myRoom.selectedWeightOfFlammableSubstances[i]*myRoom.selectedAverageSpeedBurnout[i]);
+        for (int i = 0; i<myRoom.weight.length; i++)
+            denominator+=(myRoom.weight[i]*myRoom.averageSpeedBurnout[i]);
         secondFraction=numerator/denominator;
         Double temp=firstFraction*secondFraction;
         if ((0.15<temp)&(temp<1.22))
