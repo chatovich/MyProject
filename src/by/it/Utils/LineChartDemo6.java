@@ -1,6 +1,6 @@
 package by.it.Utils;
 
-import java.awt.Color;
+import java.awt.*;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -120,12 +120,33 @@ public class LineChartDemo6 extends ApplicationFrame {
         plot.setRangeGridlinePaint(Color.black);
 
         final XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-        renderer.setSeriesLinesVisible(0, false);
+        renderer.setSeriesShapesVisible(0, false);
         renderer.setSeriesShapesVisible(1, false);
         renderer.setSeriesShapesVisible(2, false);
         plot.setRenderer(renderer);
+        plot.getRenderer().setSeriesStroke(
+                0,
+                new BasicStroke(
+                        2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
+                        1.0f, new float[] {10.0f, 6.0f}, 0.0f
+                )
+        );
+        plot.getRenderer().setSeriesStroke(
+                1,
+                new BasicStroke(
+                        2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
+                        1.0f, new float[] {6.0f, 6.0f}, 0.0f
+                )
+        );
+        plot.getRenderer().setSeriesStroke(
+                2,
+                new BasicStroke(
+                        2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
+                        1.0f, new float[] {2.0f, 6.0f}, 0.0f
+                )
+        );
 
-        renderer.setDrawSeriesLineAsPath(true);
+        //renderer.setDrawSeriesLineAsPath(true);
         // change the auto tick unit selection to integer units only...
         final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
