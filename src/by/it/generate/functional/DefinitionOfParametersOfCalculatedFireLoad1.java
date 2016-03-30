@@ -18,7 +18,15 @@ public class DefinitionOfParametersOfCalculatedFireLoad1 {
     public void getRoom(Room room){
         this.myRoom=room;
     }
-
+    /**
+     * Функция нахождения всего
+     */
+   /* public void findVentilationParameter(){
+        myRoom.getParametersCalculatedFireLoad().setVentilationParameter(
+                (myRoom.getParametersCalculatedFireLoad().getGeneralSquareOfApertures()*
+                        (sqrt(myRoom.getParametersCalculatedFireLoad().getReducedHeightOfApertures())))/
+                        myRoom.getCommonParameters().getSquareOfConstruction());
+    }*/
     /**
      * Функция нахождения приведенной высоты проемов в вертикальных ограждающих конструкциях помещения
      * и общей площади проемов в наружных стенах помещения
