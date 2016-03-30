@@ -1,4 +1,4 @@
-package by.it.Utils;
+package by.it.Utils.OtrherChart;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;

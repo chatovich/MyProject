@@ -1,4 +1,4 @@
-package by.it.Utils;
+package by.it.Utils.OtrherChart;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

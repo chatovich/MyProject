@@ -1,63 +1,40 @@
 package by.it.Utils;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.io.*;
+import java.util.ArrayList;
+
 import by.it.generate.Building;
-import by.it.generate.Room;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
+import org.jfree.chart.*;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.entity.StandardEntityCollection;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.plot.*;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import java.awt.*;
-import java.io.*;
-import java.util.ArrayList;
-
 /**
- * Объект получает здание и создает изображения для каждого его помещения
- * и может перегнать их в HTML
+ * Created by Admin on 30.03.2016.
  */
-public class MyChart {
+public class MyChart2 {
     Building myBuilding;
-
-    public MyChart(Building build) throws FileNotFoundException {
-        myBuilding=build;
-        int i=0;
-        for (Room temp:myBuilding.getRoom()){
-            createImage(createChart(createDataset(temp),temp),i);//создаем изображения для каждого помещения
-            i++;
-        }
-        chartToHTML();
-    }
+   // public MyChart(Building build) {
+     //   myBuilding=build;
+   // }
     ArrayList<String> imageNames=new ArrayList<String>();
 
-    private XYDataset createDataset(Room myRoom) {
+    private XYDataset createDataset() {
         final XYSeries series1 = new XYSeries("Среднеобъемная температура");
-        int i=0;
-        for (Double temp:myRoom.getIntegratedThermalAndTechnicalParameters().getChangesInMeanBulkTemperature()) {
-            series1.add(i, temp);
-            i++;
-        }
-
+        series1.add(1.0, 1.0);
+        series1.add(1.0, 5.0);
         final XYSeries series2 = new XYSeries("Температура перекрытия");
-        i=0;
-        for (Double temp:myRoom.getIntegratedThermalAndTechnicalParameters().getChangeInAverageTemperatureOfSlab()) {
-            series2.add(i, temp);
-            i++;
-        }
-
+        series2.add(1.0, 5.0);
+        series2.add(3.0, 4.0);
         final XYSeries series3 = new XYSeries("Температура вертикальных конструкций");
-        i=0;
-        for (Double temp:myRoom.getIntegratedThermalAndTechnicalParameters().getChangeInAverageTemperatureOfWalls()) {
-            series3.add(i, temp);
-            i++;
-        }
+        series3.add(3.0, 4.0);
+        series3.add(15.0, 2.0);
         final XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series1);
         dataset.addSeries(series2);
@@ -65,11 +42,12 @@ public class MyChart {
 
         return dataset;
     }
-    private JFreeChart createChart(final XYDataset dataset,Room myRoom) {
+    private JFreeChart createChart(final XYDataset dataset) {
         char degree=176;//degree sign
-        String title=myRoom.getCommonParameters().getName();
+       // String title=myRoom.getCommonParameters().getName();
+        // create the chart...
         final JFreeChart chart = ChartFactory.createXYLineChart(
-                title,                           // chart title
+                "",                           // chart title
                 "Время, t, мин",                // x axis label
                 "Температура, Т, С"+degree,     // y axis label
                 dataset,                        // data
@@ -79,11 +57,16 @@ public class MyChart {
                 false                     // urls
         );
 
+        // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
         chart.setBackgroundPaint(Color.white);
 
+//        final StandardLegend legend = (StandardLegend) chart.getLegend();
+        //      legend.setDisplaySeriesShapes(true);
+
+        // get a reference to the plot for further customisation...
         final XYPlot plot = chart.getXYPlot();
         plot.setBackgroundPaint(Color.white);
-
+        //    plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));
         plot.setDomainGridlinePaint(Color.black);
         plot.setRangeGridlinePaint(Color.black);
 
@@ -95,8 +78,10 @@ public class MyChart {
         plot.getRenderer().setSeriesStroke(
                 0,
                 new BasicStroke(
-                        2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)
-        );
+                        2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                     //   1.0f, new float[] {10.0f, 6.0f}, 0.0f
+             //   )
+     //   );
         plot.getRenderer().setSeriesStroke(
                 1,
                 new BasicStroke(
@@ -112,40 +97,42 @@ public class MyChart {
                 )
         );
 
+        // change the auto tick unit selection to integer units only...
         final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        // OPTIONAL CUSTOMISATION COMPLETED.
 
         return chart;
     }
-
-    private void chartToHTML() throws FileNotFoundException {
-
+    public void ChartToHTML() throws FileNotFoundException {
+        // write an HTML page incorporating the image with an image map
         String fileName="allCharts.html";
-        final File file = new File("src/by/it/ProgramCreate/"+fileName);
-        final OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
+        final File file2 = new File("src/by/it/ProgramCreate/"+fileName);
+        final OutputStream out = new BufferedOutputStream(new FileOutputStream(file2));
         final PrintWriter writer = new PrintWriter(out);
         writer.println("<HTML>");
         writer.println("<HEAD><TITLE>Графики всех помещений</TITLE></HEAD>");
         writer.println("<BODY>");
-
+        //    ChartUtilities.writeImageMap(writer, "chart", info);
         for (String temp: imageNames)
         writer.println("<IMG SRC=\""+temp+"\" "
                 + "WIDTH=\"600\" HEIGHT=\"400\" BORDER=\"0\" USEMAP=\"#chart\">");
-
         writer.println("</BODY>");
         writer.println("</HTML>");
         writer.close();
     }
-
-    private void createImage(JFreeChart chart, int i){
+    public void CreateImage(MyChart2 demo, int i){
         final ChartRenderingInfo info=new ChartRenderingInfo(new StandardEntityCollection());
         String fileName="Chart"+i+".png";
         imageNames.add(fileName);
         final File file=new File("src/by/it/ProgramCreate/"+fileName);
         try {
-            ChartUtilities.saveChartAsPNG(file,chart,600,400,info);
+            ChartUtilities.saveChartAsPNG(file,demo.createChart(demo.createDataset()),600,400,info);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static void main(String[] args) {
+
     }
 }

@@ -1,4 +1,4 @@
-package by.it.Utils;
+package by.it.Utils.OtrherChart;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
