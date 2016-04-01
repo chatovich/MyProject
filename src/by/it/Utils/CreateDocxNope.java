@@ -28,11 +28,17 @@ public class CreateDocxNope {
         XWPFTableRow tableOneRowOne = tableOne.getRow(0);
         tableOneRowOne.getCell(0).setText("Hello");
         tableOneRowOne.addNewTableCell().setText("World");
+        tableOneRowOne.getCell(0).getTableRow().addNewTableCell();
 
         XWPFTableRow tableOneRowTwo = tableOne.createRow();
         tableOneRowTwo.getCell(0).setText("This is");
         tableOneRowTwo.getCell(1).setText("a table");
+        tableOneRowTwo.setCantSplitRow(false);
 
+     //   tableOneRowTwo.getCell(1).getTableRow().getTable().createRow();
+     //   tableOneRowTwo.getCell(1).getTableRow().getTable().createRow();
+        tableOneRowTwo.getCell(1).getTableRow().addNewTableCell();
+        tableOneRowTwo.getCell(1).getTableRow().addNewTableCell();
         document.createParagraph().createRun().addBreak();
 
         XWPFTable tableTwo = document.createTable();

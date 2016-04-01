@@ -35,7 +35,7 @@ public class TableWithMergedCells {
 
         wordMLPackage.getMainDocumentPart().addObject(table);
         wordMLPackage.save(new java.io.File(
-                "src/main/ProgramCreate/HelloWord9.docx") );
+                "src/by/it/ProgramCreate/HelloWord9.docx") );
     }
 
     /**
