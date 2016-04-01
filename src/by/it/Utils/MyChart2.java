@@ -123,7 +123,7 @@ public class MyChart2 {
     }
     public void CreateImage(MyChart2 demo, int i){
         final ChartRenderingInfo info=new ChartRenderingInfo(new StandardEntityCollection());
-        String fileName="Chart"+i+".png";
+        String fileName="Chart123"+i+".png";
         imageNames.add(fileName);
         final File file=new File("src/by/it/ProgramCreate/"+fileName);
         try {
@@ -133,6 +133,7 @@ public class MyChart2 {
         }
     }
     public static void main(String[] args) {
-
+        MyChart2 b=new MyChart2();
+        b.CreateImage(b,1);
     }
 }

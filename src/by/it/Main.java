@@ -1,8 +1,11 @@
 package by.it;
 
+import by.it.generate.Building;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        Building b=new Building();
+
     }
 }

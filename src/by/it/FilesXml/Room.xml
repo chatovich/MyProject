@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rooms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns="http://www.it-academy.by/xml/students"
-          xsi:schemaLocation="http://www.it-academy.by/xml/students">
+<rooms>
     <room>
         <position>1</position>
         <name>Зал учебно-тренировочных занятий по теннису на 3 корта</name>

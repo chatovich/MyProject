@@ -14,9 +14,9 @@
                          minOccurs="1"
                          maxOccurs="unbounded" />
             </sequence>
+            <attribute name="nameOfBuilding" type="string"/>
         </complexType>
     </element>
-
     <complexType name="Room">
         <sequence>
             <element name="commonParameters" type="tns:CommonParameters"/>

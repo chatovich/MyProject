@@ -35,7 +35,7 @@ public class MyChart {
         }
         chartToHTML();
     }
-    ArrayList<String> imageNames=new ArrayList<String>();
+    ArrayList<String> imageNames=new ArrayList<>();
 
     private XYDataset createDataset(Room myRoom) {
         final XYSeries series1 = new XYSeries("Среднеобъемная температура");
