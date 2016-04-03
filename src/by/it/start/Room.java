@@ -17,7 +17,7 @@ public class Room {
     Double[] selectedСs=new Double[10];//выбранные значения из таблицы для коэффициента С
     Double specifyingCoefficientС5;//уточняющий коэффициент для с5 (умножаем на него), изначально равен 1
     Double specificFireLoad;//Удельная пожарная нагрузка, МДж∙м-2 (q) вводится для нахождения Расчетной пожарной нагрузки (qp)//
-    Double[] amountOfCombustionAir=new Double[5];//выбирается количество воздуха, необходимое для сгорания 1 кг материала i-й пожарной нагрузки (V0i), м3/кг (V0)
+    Double[] amountOfCombustionAir=new Double[5];//выбирается количество воздуха, необходимое для сгорания 1 кг материала i-й пожарной нагрузки (V0i), м3/кг
     Double[] combustionHeat =new Double[5];//выбранные горючие вещества в помещении (их низшая теплота сгорания (Qh))
     Double[] weight =new Double[5];//масса выбранных горючих веществ помещения (P)
     Double selectedTemperatureOfRegion;//начальная среднеобъемная температура для выбранного района (тут список районов, value=значение температуры) (T0)
@@ -32,7 +32,7 @@ public class Room {
     Double coefficientС;//коэффициент C (c)
     Double estimatedFireLoad;//Расчетная пожарная нагрузка(qp)/////////
     Double proemnostOfRoom;//проемность помещения
-    Double averageAmountOfCombustionAir;//среднее количество воздуха для сгорания
+    Double averageAmountOfCombustionAir;//среднее количество воздуха для сгорания (V0)
     Double specificCriticalAmountOfFireLoad;//удельное критическое количество пожарной нагрузки (qкр.к), для кубического помещения объемом V, равным объему исследуемого помещения
     Double specificValueOfFireLoad;//удельное значение пожарной нагрузки (qк)
     boolean PRN;//true - если ПРН, false - если ПРВ//

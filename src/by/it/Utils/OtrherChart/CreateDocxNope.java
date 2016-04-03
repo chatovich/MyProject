@@ -1,4 +1,4 @@
-package by.it.Utils;
+package by.it.Utils.OtrherChart;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFTable;

@@ -2,6 +2,8 @@ package by.it.Utils;
 
 import by.it.generate.Building;
 import by.it.generate.Room;
+import org.docx4j.openpackaging.exceptions.InvalidFormatException;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.ChartUtilities;
@@ -17,7 +19,8 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
 /**
  * Объект получает здание и создает изображения для каждого его помещения
@@ -25,17 +28,21 @@ import java.util.ArrayList;
  */
 public class MyChart {
     Building myBuilding;
-
+    ArrayList<String> imageNames=new ArrayList<>();
+    WordprocessingMLPackage wordMLPackage;
+    public ImageAdd imageAdd;
     public MyChart(Building build) throws FileNotFoundException {
         myBuilding=build;
+    }
+    public void outputChart() throws Exception {
+        imageAdd=new ImageAdd();
+        wordMLPackage= WordprocessingMLPackage.createPackage();
         int i=0;
         for (Room temp:myBuilding.getRoom()){
             createImage(createChart(createDataset(temp),temp),i);//создаем изображения для каждого помещения
             i++;
         }
-        chartToHTML();
     }
-    ArrayList<String> imageNames=new ArrayList<>();
 
     private XYDataset createDataset(Room myRoom) {
         final XYSeries series1 = new XYSeries("Среднеобъемная температура");
@@ -118,7 +125,7 @@ public class MyChart {
         return chart;
     }
 
-    private void chartToHTML() throws FileNotFoundException {
+    public void chartToHTML() throws FileNotFoundException {
 
         String fileName="allCharts.html";
         final File file = new File("src/by/it/ProgramCreate/"+fileName);
@@ -137,15 +144,14 @@ public class MyChart {
         writer.close();
     }
 
-    private void createImage(JFreeChart chart, int i){
+    private void createImage(JFreeChart chart, int i) throws Exception {
         final ChartRenderingInfo info=new ChartRenderingInfo(new StandardEntityCollection());
         String fileName="Chart"+i+".png";
+        String filepath="src/by/it/ProgramCreate/";
         imageNames.add(fileName);
-        final File file=new File("src/by/it/ProgramCreate/"+fileName);
-        try {
-            ChartUtilities.saveChartAsPNG(file,chart,600,400,info);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        final File file=new File(filepath+fileName);
+        ChartUtilities.saveChartAsPNG(file,chart,600,400,info);
+
+        imageAdd.chartToReport(filepath+fileName);//заодно закидываем в список объектов для отчёта
     }
 }
