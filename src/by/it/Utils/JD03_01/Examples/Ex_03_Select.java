@@ -1,4 +1,6 @@
-package by.it.Utils.JD03_01;
+package by.it.Utils.JD03_01.Examples;
+
+import by.it.Utils.JD03_01.CN;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,5 +1,6 @@
-package by.it.Utils.JD03_01;
+package by.it.Utils.JD03_01.OtherSqlMethods;
 
+import by.it.Utils.JD03_01.CN;
 import by.it.generate.Aperture;
 import by.it.generate.Building;
 import by.it.generate.Room;

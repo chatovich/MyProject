@@ -1,10 +1,11 @@
 package by.it.Utils.JD03_01.CreateOrDrop;
 
+import by.it.Utils.JD03_01.OtherSqlMethods.Insert;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * methods for DB creation and update
@@ -202,33 +203,14 @@ public class QueriesForDB_Creation {
                 "ON UPDATE CASCADE\n");
     }
 
-    public static void insertData (Statement statement) throws SQLException {
-
-        statement.executeUpdate("insert into role (role_type) values ('user');");
-        statement.executeUpdate("insert into role (role_type) values ('admin');");
-
-        statement.executeUpdate("insert into users (name, surname, login, password, birth_date, id_role, email) " +
-                "values ('Kiryl','Laurynau','laurynau','yultos','1986-05-26',1, 'kiryl.laurynau@gmail.com');");
-        statement.executeUpdate("insert into users (name, surname, login, password, birth_date, id_role) " +
-                "values ('Ivan','Ivanov','ivanov','yultos','1990-01-05',1);");
-        statement.executeUpdate("insert into users (name, surname, login, password, birth_date, id_role, email) " +
-                "values ('John','Smith','smith','yultos','1980-10-20',1, 'smith@gmail.com');");
-        statement.executeUpdate("insert into users (name, surname, login, password, birth_date, id_role, email) " +
-                "values ('Yuliya','Chatovich','chatovich','yultos','1988-07-30',2, 'chatovich@gmail.com');");
-
-        statement.executeUpdate("insert into cities (city) values ('Minsk');");
-        statement.executeUpdate("insert into cities (city) values ('Moscow');");
-        statement.executeUpdate("insert into cities (city) values ('New York');");
-        statement.executeUpdate("insert into cities (city) values ('Florence');");
-        statement.executeUpdate("insert into cities (city) values ('London');");
-
-        statement.executeUpdate("insert into profiles (id_user,id_city,description) " +
-                "values ((select id from users where name='Yuliya')," +
-                "(select id_city from cities where city='Minsk'), 'Sunny 2-rooms apartment on Kolasa str');");
-
-        statement.executeUpdate("insert into feedbacks (feedback_from, feedback_to, feedback_text) " +
-                "values (4,1,'cute guy with excellent sence of humour and a really comfortable flat')");
-
+    public static void insertData () throws SQLException {
+        Insert.addToFlammableSubstance("Drevesina", 4.2, 13.8, 2.4);
+        Insert.addToFlammableSubstance("Izolyciya provodov, kabeley PVH", 13.05, 33.5, 3.73);
+        Insert.addToFlammableSubstance("Maslo", 10.5, 42.3, 2.1);
+        Insert.addToFlammableSubstance("Plastmassa (Polyetilen)", 11.42,47.14, 0.62);
+        Insert.addToFlammableSubstance("RTI", 13.18, 33.52, 0.9);
+        Insert.addToFlammableSubstance("Tekstilnie izdeliya",2.12,16.7,1.44);
+        Insert.addToUsers("henk","guevara333","henk@pochta.ru",true);
     }
 
     public static void showTables (Statement statement) throws SQLException {

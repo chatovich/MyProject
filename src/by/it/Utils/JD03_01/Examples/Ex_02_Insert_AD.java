@@ -1,4 +1,6 @@
-package by.it.Utils.JD03_01;
+package by.it.Utils.JD03_01.Examples;
+
+import by.it.Utils.JD03_01.CN;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +13,7 @@ public class Ex_02_Insert_AD {
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
-            Statement statement=connection.createStatement();) {
+             Statement statement=connection.createStatement();) {
 
             //вставляем объявления
             statement.executeUpdate(

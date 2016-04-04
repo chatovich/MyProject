@@ -17,8 +17,8 @@ public class DB_Creation {
 
             //QueriesForDB_Creation.createSchema(statement);
             QueriesForDB_Creation.createTable(statement);
-          //  QueriesForDB_Creation.insertData(statement);
-           // QueriesForDB_Creation.showTables(statement);
+            QueriesForDB_Creation.insertData();
+            //QueriesForDB_Creation.showTables(statement);
            // System.out.println("Database searchhost_java was created");
 
 

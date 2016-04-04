@@ -1,5 +1,6 @@
-package by.it.Utils.JD03_01;
+package by.it.Utils.JD03_01.OtherSqlMethods;
 
+import by.it.Utils.JD03_01.CN;
 import by.it.generate.Aperture;
 import by.it.generate.Building;
 import by.it.generate.Room;
@@ -12,22 +13,22 @@ import java.util.List;
 /**
  * Created by Admin on 04.04.2016.
  */
-public class Addable {
-    public static void AddToUsers(String login,String password,String email){
+public class Insert {
+    public static void addToUsers(String login, String password, String email, Boolean admin){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
              Statement statement=connection.createStatement()) {
 
                 statement.executeUpdate(
-                    "INSERT INTO users (login, password, email) "+
-                            "VALUES ("+login+","+password+","+email+");");
+                    "INSERT INTO users (login, password, email,admin) "+
+                            "VALUES ("+login+","+password+","+email+","+admin+");");
             }
         catch (Exception e){
             e.printStackTrace();
         }
     }
-    public static void AddToSubstancesOfRoom(Integer id_substance,Integer id_room,Double weight){
+    public static void addToSubstancesOfRoom(Integer id_substance, Integer id_room, Double weight){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -41,7 +42,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToFlammableSubstance(String name,Double amountOfCombustionAir,Double combustionHeat,Double averageSpeedBurnout){
+    public static void addToFlammableSubstance(String name, Double amountOfCombustionAir, Double combustionHeat, Double averageSpeedBurnout){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -55,15 +56,15 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToRoom(String position,String name,Double square,Double height,Double perimeter,
-                                 Double volume,Double squareOfConstruction,Double specificFireLoad,Double reducedHeightOfApertures,
-                                 Double generalSquareOfApertures,Double ventilationParameter,Double coefficientK,Double coefficientA,
-                                 Double coefficientB,Double coefficientS,Double estimatedFireLoad,Double proemnostOfRoom,
+    public static void addToRoom(String position, String name, Double square, Double height, Double perimeter,
+                                 Double volume, Double squareOfConstruction, Double specificFireLoad, Double reducedHeightOfApertures,
+                                 Double generalSquareOfApertures, Double ventilationParameter, Double coefficientK, Double coefficientA,
+                                 Double coefficientB, Double coefficientS, Double estimatedFireLoad, Double proemnostOfRoom,
                                  Double averageAmountOfCombustionAir, Double specificCriticalAmountOfFireLoad,
-                                 Double specificValueOfFireLoad,Boolean PRN,Double maximumMeanBulkTemperature,
-                                 Double durationOfFireSurround,Double timeReachMaximumMeanBulkTemperature,
-                                 Double maximumAverageTemperatureOfWallSurface,Double timeToReachMaximumTemperatureOfWallSurface,
-                                 Double averageMaximumTemperatureOfSlab,Double timeToReachMaximumTemperatureOfSlabSurface){
+                                 Double specificValueOfFireLoad, Boolean PRN, Double maximumMeanBulkTemperature,
+                                 Double durationOfFireSurround, Double timeReachMaximumMeanBulkTemperature,
+                                 Double maximumAverageTemperatureOfWallSurface, Double timeToReachMaximumTemperatureOfWallSurface,
+                                 Double averageMaximumTemperatureOfSlab, Double timeToReachMaximumTemperatureOfSlabSurface){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -90,7 +91,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToRoom(Room r,Integer id_building){
+    public static void addToRoom(Room r, Integer id_building){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -128,7 +129,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToCoefficientsForRoom(Integer id_room,Double s1,Double s4,Double s7,Double s8,Double s9,Double s10){
+    public static void addToCoefficientsForRoom(Integer id_room,Double s1,Double s4,Double s7,Double s8,Double s9,Double s10){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -142,7 +143,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToCoefficientsForRoom(Integer id_room, List<Double> s){
+    public static void addToCoefficientsForRoom(Integer id_room, List<Double> s){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -156,7 +157,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToCoefficientsForBuilding(Integer id_building,Double s2,Double s3,Double s5,Double s6){
+    public static void addToCoefficientsForBuilding(Integer id_building,Double s2,Double s3,Double s5,Double s6){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -170,7 +171,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToCoefficientsForBuilding(Integer id_building, List<Double> s){
+    public static void addToCoefficientsForBuilding(Integer id_building, List<Double> s){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -183,7 +184,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToChangesInMeanBulkTemperature(Integer id_room, List<Double> t){
+    public static void addToChangesInMeanBulkTemperature(Integer id_room, List<Double> t){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -206,7 +207,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToChangeInAverageTemperatureOfWalls(Integer id_room, List<Double> t){
+    public static void addToChangeInAverageTemperatureOfWalls(Integer id_room, List<Double> t){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -229,7 +230,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToChangeInAverageTemperatureOfSlab(Integer id_room, List<Double> t){
+    public static void addToChangeInAverageTemperatureOfSlab(Integer id_room, List<Double> t){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -252,7 +253,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToBuilding(String nameOfBuilding, Double selectedTemperatureOfRegion,
+    public static void addToBuilding(String nameOfBuilding, Double selectedTemperatureOfRegion,
                                      Double specifyingCoefficientS5, Integer id_user, Integer id_allbuildings){
         try (Connection connection=
                      DriverManager.getConnection
@@ -268,7 +269,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToBuilding(Building build, Integer id_user, Integer id_allbuildings){
+    public static void addToBuilding(Building build, Integer id_user, Integer id_allbuildings){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -283,7 +284,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToAperure(List<Aperture> ap, Integer id_room){
+    public static void addToAperure(List<Aperture> ap, Integer id_room){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
@@ -299,7 +300,7 @@ public class Addable {
             e.printStackTrace();
         }
     }
-    public static void AddToAllBuildings(){
+    public static void addToAllBuildings(){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
