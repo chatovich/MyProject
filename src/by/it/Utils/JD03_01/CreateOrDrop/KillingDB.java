@@ -1,4 +1,6 @@
-package by.it.Utils.JD03_01;
+package by.it.Utils.JD03_01.CreateOrDrop;
+
+import by.it.Utils.JD03_01.CN;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Kill DB
+ * Drop all tables of DB
  */
 public class KillingDB {
 

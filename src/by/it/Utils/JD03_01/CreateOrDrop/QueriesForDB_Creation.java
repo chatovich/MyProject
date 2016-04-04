@@ -1,4 +1,4 @@
-package by.it.Utils.JD03_01;
+package by.it.Utils.JD03_01.CreateOrDrop;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,14 +12,14 @@ import java.util.Date;
 public class QueriesForDB_Creation {
 
     public static void createSchema (Statement statement) throws Exception {
-        statement.executeUpdate("CREATE SCHEMA `searchhost_java` DEFAULT CHARACTER SET utf8 ;");
+        statement.executeUpdate("CREATE SCHEMA `engineering1` DEFAULT CHARACTER SET utf8 ;");
     }
 
     public static void createTable(Statement statement) throws Exception {
 
         statement.executeUpdate("CREATE TABLE `allbuildings` (\n" +
                 "  `id.allbuildings` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
-                "  `dateofbuilding` date NOT NULL\n" +
+                "  `dateofbuilding` DATETIME NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
         statement.executeUpdate("CREATE TABLE `aperture` (\n" +
@@ -27,7 +27,7 @@ public class QueriesForDB_Creation {
                 "  `typeOfAperture` varchar(100) NOT NULL,\n" +
                 "  `width` double NOT NULL,\n" +
                 "  `height` double NOT NULL,\n" +
-                "  `count` int(11) NOT NULL,\n" +
+                "  `count` tinyint NOT NULL,\n" +
                 "  `squareOfAperture` double NOT NULL,\n" +
                 "  `fk.id.room` int(11) NOT NULL \n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
@@ -68,8 +68,7 @@ public class QueriesForDB_Creation {
                 "  `name` varchar(100) NOT NULL,\n" +
                 "  `amountOfCombustionAir` double NOT NULL,\n" +
                 "  `combustionHeat` double NOT NULL,\n" +
-                "  `averageSpeedBurnout` double NOT NULL,\n" +
-                "  `weight` double NOT NULL\n" +
+                "  `averageSpeedBurnout` double NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
         statement.executeUpdate("CREATE TABLE `room` (\n" +
@@ -108,14 +107,16 @@ public class QueriesForDB_Creation {
         statement.executeUpdate("CREATE TABLE `substancesofroom` (\n" +
                 "  `id.substancesOfRoom` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
                 "  `fk.id.substance` int(11) NOT NULL,\n" +
-                "  `fk.id.room` int(11) NOT NULL\n" +
+                "  `fk.id.room` int(11) NOT NULL,\n" +
+                "  `weight` double NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
         statement.executeUpdate("CREATE TABLE `users` (\n" +
                 "  `id.user` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
                 "  `login` varchar(100) NOT NULL,\n" +
                 "  `password` varchar(100) NOT NULL,\n" +
-                "  `email` varchar(100) NOT NULL\n" +
+                "  `email` varchar(100) NOT NULL,\n" +
+                "  `admin` tinyint(1) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
 
         StringBuilder sb=new StringBuilder();
@@ -141,7 +142,9 @@ public class QueriesForDB_Creation {
                 "  `fk.id.room` int(11) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
-//////////////////////////////////////Fk
+/**
+ * Description of FOREIGN KEY-s
+ */
 
         statement.executeUpdate("ALTER TABLE `changesinmeanbulktemperature`\n" +
                 "  ADD CONSTRAINT `changesinmeanbulktemperature_ibfk_1` FOREIGN KEY (`fk.id.room`) REFERENCES `room` (`id.room`)" +

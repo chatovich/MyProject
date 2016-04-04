@@ -20,7 +20,7 @@ public class Ex_02_Insert_AD {
             );
             statement.executeUpdate(
                     "INSERT INTO ad (RoomCount, Price, Area, Floor, Floors, Address, FK_Users, Description) "+
-                    "VALUES (2, 85000, '42', 3, 5, 'Nezavisimosti 35', 1, 'Elit app.');"            );
+                    "VALUES (2, 85000, '42', 3, 5, 'Nezavisimosti 35', 1, 'Elit app.');");
             statement.executeUpdate(
                     "INSERT INTO ad (RoomCount, Price, Area, Floor, Floors, Address, FK_Users, Description) "+
                     "VALUES (2, 45000, '42', 1, 1, 'Murova 5', 1, 'Far app.');"            );
