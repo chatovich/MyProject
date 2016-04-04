@@ -16,7 +16,7 @@ public class Ex_03_Select {
                 //получаем пользователей
                 ResultSet resultSet=statement.executeQuery("select * from users;");
                 while (resultSet.next()){
-                    String out=resultSet.getString("Email")+", "+resultSet.getString("Login");
+                    String out=resultSet.getString("Email")+", "+resultSet.getString("Login")+resultSet.getString("password");
                     System.out.println(out);
                 }
             }

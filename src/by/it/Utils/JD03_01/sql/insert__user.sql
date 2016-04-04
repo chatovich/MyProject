@@ -1,2 +1,2 @@
-insert into users(Login,Password,Email,Role)
-       values('avkhmeleva','asdfg','avk@tut.by','user');
+insert into users(Login,Password,Email)
+       values('predkel','1234','slouch@tut.by');
