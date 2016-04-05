@@ -82,6 +82,7 @@ public class QueriesForDB_Creation {
                 "  `volume` double NOT NULL,\n" +
                 "  `squareOfConstruction` double NOT NULL,\n" +
                 "  `specificFireLoad` double NOT NULL,\n" +
+                "  `specificFireLoadZVEZDOCHKA` double,\n" +
                 "  `reducedHeightOfApertures` double NOT NULL,\n" +
                 "  `generalSquareOfApertures` double NOT NULL,\n" +
                 "  `ventilationParameter` double NOT NULL,\n" +
