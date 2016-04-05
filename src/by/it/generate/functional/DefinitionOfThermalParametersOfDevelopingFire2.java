@@ -73,12 +73,15 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
      * Функция нахождения среднего количества воздуха для сгорания
      */
     public Double findAverageAmountOfCombustionAir(Room myRoom){
+        if (myRoom.getFlammableSubstance().size()==0)
+            return 4.2;
         Double numerator=0.0;
         Double denominator=0.0;
         for (FlammableSubstance temp:myRoom.getFlammableSubstance()){
-            numerator+=temp.getWeight()*temp.getAmountOfCombustionAir();
+      ///////      numerator+=temp.getWeight()*temp.getAmountOfCombustionAir();
             denominator+=temp.getWeight();
         }
+        numerator=myRoom.getParametersCalculatedFireLoad().getEstimatedFireLoad()*myRoom.getCommonParameters().getSquare();
         return myRound(numerator/denominator);
     }
     /**
@@ -99,8 +102,7 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
     public Double findSpecificValueOfFireLoad(Room myRoom){
         Double numerator=0.0;
         Double denominator;
-        for (FlammableSubstance temp:myRoom.getFlammableSubstance())
-            numerator+=(temp.getCombustionHeat()*temp.getWeight());
+        numerator=myRoom.getParametersCalculatedFireLoad().getEstimatedFireLoad()*myRoom.getCommonParameters().getSquare();////////////////////
         denominator=(((6*pow(myRoom.getCommonParameters().getVolume(),0.667))-
                 myRoom.getParametersCalculatedFireLoad().getGeneralSquareOfApertures())*13.8);
         return myRound(numerator/denominator);
@@ -115,24 +117,28 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
      * Функция нахождения характерной продолжительности объемного пожара
      */
     public Double findDurationOfFireSurround(Room myRoom){
-        Double numerator=0.0;Double denominator;
+        Double numerator;Double denominator;
         Double firstFraction;Double secondFraction;
-        for (FlammableSubstance temp:myRoom.getFlammableSubstance())
-            numerator+=(temp.getCombustionHeat()*temp.getWeight());
 
+        numerator=myRoom.getParametersCalculatedFireLoad().getEstimatedFireLoad()*myRoom.getCommonParameters().getSquare();
         denominator=6258*myRoom.getParametersCalculatedFireLoad().getGeneralSquareOfApertures()*
                 sqrt(myRoom.getParametersCalculatedFireLoad().getReducedHeightOfApertures());
         firstFraction=numerator/denominator;
 
-        numerator=0.0;denominator=0.0;
-        for (FlammableSubstance temp:myRoom.getFlammableSubstance())
-            numerator+=(temp.getWeight());
+        if (myRoom.getFlammableSubstance().size()==0)
+            secondFraction=1.0;
+        else {
+            numerator = 0.0;
+            denominator = 0.0;
+            for (FlammableSubstance temp : myRoom.getFlammableSubstance())
+                numerator += (temp.getWeight());
 
-        numerator*=2.4;
-        for (FlammableSubstance temp:myRoom.getFlammableSubstance())
-            denominator+=(temp.getWeight()*temp.getAverageSpeedBurnout());
+            numerator *= 2.4;
+            for (FlammableSubstance temp : myRoom.getFlammableSubstance())
+                denominator += (temp.getWeight() * temp.getAverageSpeedBurnout());
 
-        secondFraction=numerator/denominator;
+            secondFraction = numerator / denominator;
+        }
         Double temp=firstFraction*secondFraction;
         if ((0.15<temp)&(temp<1.22))
             return myRound(temp);

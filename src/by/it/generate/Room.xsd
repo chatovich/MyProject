@@ -68,6 +68,7 @@
         <sequence>
             <element name="selectedSs" type="double" minOccurs="6" maxOccurs="6"/>
             <element name="specificFireLoad" type="double" />
+            <element name="specificFireLoadZVEZDOCHKA" type="double" />
             <element name="reducedHeightOfApertures" type="double" />
             <element name="generalSquareOfApertures" type="double" />
             <element name="ventilationParameter" type="double" />

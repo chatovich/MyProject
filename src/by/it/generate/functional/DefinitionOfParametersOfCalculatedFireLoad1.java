@@ -2,6 +2,7 @@ package by.it.generate.functional;
 
 import by.it.generate.Aperture;
 import by.it.generate.Building;
+import by.it.generate.FlammableSubstance;
 import by.it.generate.Room;
 
 import static by.it.Utils.Rounding.myRound;
@@ -33,6 +34,8 @@ public class DefinitionOfParametersOfCalculatedFireLoad1 {
         myRoom.getParametersCalculatedFireLoad().setCoefficientB(findCoefficientB(myRoom));
 
         myRoom.getParametersCalculatedFireLoad().setCoefficientS(findCoefficientС(myRoom));
+
+        myRoom.getParametersCalculatedFireLoad().setSpecificFireLoad(findSpiSpecificFireLoad(myRoom));
 
         myRoom.getParametersCalculatedFireLoad().setEstimatedFireLoad(findEstimatedFireLoad(myRoom));
     }
@@ -101,6 +104,20 @@ public class DefinitionOfParametersOfCalculatedFireLoad1 {
         for (Double temp1:myBuilding.getCoefficientSForBuild())
             coefficientС*=temp1;
         return myRound(coefficientС);
+    }
+    /**
+     * Функция нахождения удельной пожарной нагрузки
+     */
+    public Double findSpiSpecificFireLoad(Room myRoom){
+        if (myRoom.getFlammableSubstance().size()==0)
+            return myRoom.getParametersCalculatedFireLoad().getSpecificFireLoadZVEZDOCHKA();
+        else {
+            Double num=0.0;
+            for(FlammableSubstance temp:myRoom.getFlammableSubstance()){
+                num+=temp.getWeight()*temp.getCombustionHeat();
+            }
+            return num/myRoom.getCommonParameters().getSquare();
+        }
     }
     /**
      * Функция нахождения расчетной пожарной нагрузки

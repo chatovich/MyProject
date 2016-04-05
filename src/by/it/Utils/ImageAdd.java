@@ -27,7 +27,7 @@ public class ImageAdd {
     public void chartToReport(String filepath) throws Exception {
 
         // The image to add
-        File file = new File(System.getProperty("user.dir")
+        File file = new File(System.getProperty("user.dir")+"/"
                 + filepath );
 
         // Our utility method wants that as a byte array

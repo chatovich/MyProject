@@ -79,21 +79,19 @@ public class MyChart2 {
                 0,
                 new BasicStroke(
                         2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-                     //   1.0f, new float[] {10.0f, 6.0f}, 0.0f
-             //   )
-     //   );
+
         plot.getRenderer().setSeriesStroke(
                 1,
                 new BasicStroke(
                         2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
-                        1.0f, new float[] {10.0f, 6.0f}, 0.0f
+                        1.0f, new float[] {3.0f, 0.0f}, 2.0f
                 )
         );
         plot.getRenderer().setSeriesStroke(
                 2,
                 new BasicStroke(
                         2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
-                        1.0f, new float[] {2.0f, 6.0f}, 0.0f
+                        1.0f, new float[] {1.0f, 15.0f}, 2.0f
                 )
         );
 
