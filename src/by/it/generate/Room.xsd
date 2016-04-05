@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-        targetNamespace="http://generate.it.by"
-        xmlns:tns="http://generate.it.by"
+        targetNamespace="http://www.it.by/generate/"
+        xmlns:tns="http://www.it.by/generate/"
         elementFormDefault="qualified">
     <element name="building">
         <complexType>
@@ -9,12 +9,13 @@
                 <element name="selectedTemperatureOfRegion" type="double" />
                 <element name="coefficientSForBuild" type="double" minOccurs="4" maxOccurs="4"/>
                 <element name="specifyingCoefficientS5" type="double" default="1"/>
+                <element name="nameOfBuilding" type="string"/>
                 <element name="room"
                          type="tns:Room"
                          minOccurs="1"
                          maxOccurs="unbounded" />
             </sequence>
-            <attribute name="nameOfBuilding" type="string"/>
+
         </complexType>
     </element>
     <complexType name="Room">
@@ -55,7 +56,7 @@
 
     <complexType name="FlammableSubstance">
         <sequence>
-            <element name="name" type="string" />
+            <element name="nameOfSubstance" type="string" />
             <element name="amountOfCombustionAir" type="double" />
             <element name="combustionHeat" type="double"/>
             <element name="averageSpeedBurnout" type="double"/>
@@ -90,8 +91,8 @@
 
     <complexType name="CommonParameters">
     <sequence>
-        <element name="position" type="string" />
-        <element name="name" type="string" />
+        <element name="positionOfRoom" type="string" />
+        <element name="nameOfRoom" type="string" />
         <element name="square" type="double" />
         <element name="height" type="double" />
         <element name="perimeter" type="double" />

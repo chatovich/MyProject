@@ -60,8 +60,8 @@ public class TableWithMergedCells {
 
         for (Room room : build.getRoom()) {
             temp=new ArrayList<>();
-            temp.add(room.getCommonParameters().getPosition());
-            temp.add(room.getCommonParameters().getName());
+            temp.add(room.getCommonParameters().getPositionOfRoom());
+            temp.add(room.getCommonParameters().getNameOfRoom());
             temp.add(String.valueOf(room.getCommonParameters().getSquare()));
             temp.add("-");
             addTableRowWithMergedCells(temp, table);
@@ -87,8 +87,8 @@ public class TableWithMergedCells {
 
         for (Room room : build.getRoom()) {//печатаем первую строку с первым проемом
             temp=new ArrayList<>();
-            temp.add(room.getCommonParameters().getPosition());
-            temp.add(room.getCommonParameters().getName());
+            temp.add(room.getCommonParameters().getPositionOfRoom());
+            temp.add(room.getCommonParameters().getNameOfRoom());
             temp.add(String.valueOf(room.getCommonParameters().getSquare()));
             temp.add(String.valueOf(room.getCommonParameters().getVolume()));
             temp.add(room.getAperture().get(0).getTypeOfAperture());
@@ -124,8 +124,8 @@ public class TableWithMergedCells {
 
         for (Room room : build.getRoom()) {
             temp=new ArrayList<>();
-            temp.add(room.getCommonParameters().getPosition());
-            temp.add(room.getCommonParameters().getName());
+            temp.add(room.getCommonParameters().getPositionOfRoom());
+            temp.add(room.getCommonParameters().getNameOfRoom());
             temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getGeneralSquareOfApertures()));
             temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getReducedHeightOfApertures()));
             temp.add(String.valueOf(room.getCommonParameters().getSquareOfConstruction()));
@@ -159,8 +159,8 @@ public class TableWithMergedCells {
 
         for (Room room : build.getRoom()) {
             temp = new ArrayList<>();
-            temp.add(room.getCommonParameters().getPosition());
-            temp.add(room.getCommonParameters().getName());
+            temp.add(room.getCommonParameters().getPositionOfRoom());
+            temp.add(room.getCommonParameters().getNameOfRoom());
             temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getSelectedSs().get(0)));
             temp.add(String.valueOf(build.getCoefficientSForBuild().get(0)));
             temp.add(String.valueOf(build.getCoefficientSForBuild().get(1)));
@@ -195,9 +195,9 @@ public class TableWithMergedCells {
 
         for (Room room : build.getRoom()) {//печатаем первую строку с первым материалом
             temp=new ArrayList<>();
-            temp.add(room.getCommonParameters().getPosition());
-            temp.add(room.getCommonParameters().getName());
-            temp.add(room.getFlammableSubstance().get(0).getName());
+            temp.add(room.getCommonParameters().getPositionOfRoom());
+            temp.add(room.getCommonParameters().getNameOfRoom());
+            temp.add(room.getFlammableSubstance().get(0).getNameOfSubstance());
             temp.add(String.valueOf(room.getFlammableSubstance().get(0).getWeight()));
             temp.add(String.valueOf(room.getFlammableSubstance().get(0).getAmountOfCombustionAir()));
             temp.add(String.valueOf(room.getDetermineTheTypeOfFire().getAverageAmountOfCombustionAir()));
@@ -210,7 +210,7 @@ public class TableWithMergedCells {
                     temp=new ArrayList<>();
                     temp.add(null);
                     temp.add(null);
-                    temp.add(room.getFlammableSubstance().get(0).getName());
+                    temp.add(room.getFlammableSubstance().get(0).getNameOfSubstance());
                     temp.add(String.valueOf(room.getFlammableSubstance().get(0).getWeight()));
                     temp.add(String.valueOf(room.getFlammableSubstance().get(0).getAmountOfCombustionAir()));
                     temp.add(null);
@@ -239,8 +239,8 @@ public class TableWithMergedCells {
 
         for (Room room : build.getRoom()) {
             temp=new ArrayList<>();
-            temp.add(room.getCommonParameters().getPosition());
-            temp.add(room.getCommonParameters().getName());
+            temp.add(room.getCommonParameters().getPositionOfRoom());
+            temp.add(room.getCommonParameters().getNameOfRoom());
             temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getSpecificFireLoad()));
             temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getCoefficientA()));
             temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getCoefficientB()));
@@ -274,8 +274,8 @@ public class TableWithMergedCells {
 
         for (Room room : build.getRoom()) {
             temp=new ArrayList<>();
-            temp.add(room.getCommonParameters().getPosition());
-            temp.add(room.getCommonParameters().getName());
+            temp.add(room.getCommonParameters().getPositionOfRoom());
+            temp.add(room.getCommonParameters().getNameOfRoom());
             temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getEstimatedFireLoad()));
             temp.add(String.valueOf(room.getDetermineTheTypeOfFire().getProemnostOfRoom()));
             temp.add(String.valueOf(room.getDetermineTheTypeOfFire().getSpecificCriticalAmountOfFireLoad()));

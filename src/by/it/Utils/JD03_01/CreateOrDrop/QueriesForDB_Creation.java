@@ -66,7 +66,7 @@ public class QueriesForDB_Creation {
 
         statement.executeUpdate("CREATE TABLE `flammablesubstance` (\n" +
                 "  `id.substance` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
-                "  `name` varchar(100) NOT NULL,\n" +
+                "  `nameOfSubstance` varchar(100) NOT NULL,\n" +
                 "  `amountOfCombustionAir` double NOT NULL,\n" +
                 "  `combustionHeat` double NOT NULL,\n" +
                 "  `averageSpeedBurnout` double NOT NULL\n" +
@@ -74,8 +74,8 @@ public class QueriesForDB_Creation {
 
         statement.executeUpdate("CREATE TABLE `room` (\n" +
                 "  `id.room` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
-                "  `position` varchar(100) NOT NULL,\n" +
-                "  `name` varchar(100) NOT NULL,\n" +
+                "  `positionOfRoom` varchar(100) NOT NULL,\n" +
+                "  `nameOfRoom` varchar(100) NOT NULL,\n" +
                 "  `square` double NOT NULL,\n" +
                 "  `height` double NOT NULL,\n" +
                 "  `perimeter` double NOT NULL,\n" +

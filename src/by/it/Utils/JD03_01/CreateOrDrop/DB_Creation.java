@@ -16,7 +16,7 @@ public class DB_Creation {
             Statement statement = connection.createStatement()) {
 
             //QueriesForDB_Creation.createSchema(statement);
-            QueriesForDB_Creation.createTable(statement);
+           // QueriesForDB_Creation.createTable(statement);
             QueriesForDB_Creation.insertData();
             //QueriesForDB_Creation.showTables(statement);
            // System.out.println("Database searchhost_java was created");

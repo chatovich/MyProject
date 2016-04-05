@@ -74,7 +74,7 @@ public class MyChart {
     }
     private JFreeChart createChart(final XYDataset dataset,Room myRoom) {
         char degree=176;//degree sign
-        String title=myRoom.getCommonParameters().getName();
+        String title=myRoom.getCommonParameters().getNameOfRoom();
         final JFreeChart chart = ChartFactory.createXYLineChart(
                 title,                           // chart title
                 "Время, t, мин",                // x axis label

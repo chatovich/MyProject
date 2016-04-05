@@ -22,7 +22,7 @@ public class Insert {
 
                 statement.executeUpdate(
                     "INSERT INTO users (login, password, email,admin) "+
-                            "VALUES ("+login+","+password+","+email+","+admin+");");
+                            "VALUES (`"+login+"`,`"+password+"`,`"+email+"`,"+admin+");");
             }
         catch (Exception e){
             e.printStackTrace();
@@ -42,21 +42,21 @@ public class Insert {
             e.printStackTrace();
         }
     }
-    public static void addToFlammableSubstance(String name, Double amountOfCombustionAir, Double combustionHeat, Double averageSpeedBurnout){
+    public static void addToFlammableSubstance(String nameOfSubstance, Double amountOfCombustionAir, Double combustionHeat, Double averageSpeedBurnout){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "INSERT INTO flammablesubstance (name, amountOfCombustionAir,combustionHeat,averageSpeedBurnout) "+
-                            "VALUES ("+name+","+amountOfCombustionAir+","+combustionHeat+","+averageSpeedBurnout+");");
+                    "INSERT INTO flammablesubstance (nameOfSubstance, amountOfCombustionAir,combustionHeat,averageSpeedBurnout) "+
+                            "VALUES (`"+nameOfSubstance+"`,"+amountOfCombustionAir+","+combustionHeat+","+averageSpeedBurnout+");");
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
-    public static void addToRoom(String position, String name, Double square, Double height, Double perimeter,
+    public static void addToRoom(String positionOfRoom, String nameOfRoom, Double square, Double height, Double perimeter,
                                  Double volume, Double squareOfConstruction, Double specificFireLoad, Double reducedHeightOfApertures,
                                  Double generalSquareOfApertures, Double ventilationParameter, Double coefficientK, Double coefficientA,
                                  Double coefficientB, Double coefficientS, Double estimatedFireLoad, Double proemnostOfRoom,
@@ -71,14 +71,14 @@ public class Insert {
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "INSERT INTO room (position, name, square,height,perimeter,volume,squareOfConstruction,specificFireLoad, +\n" +
+                    "INSERT INTO room (positionOfRoom, nameOfRoom, square,height,perimeter,volume,squareOfConstruction,specificFireLoad, +\n" +
                             "                           reducedHeightOfApertures,generalSquareOfApertures,ventilationParameter,coefficientK,coefficientA, +\n" +
                             "                           coefficientB,coefficientS,estimatedFireLoad,proemnostOfRoom,averageAmountOfCombustionAir, +\n" +
                             "                           specificCriticalAmountOfFireLoad,specificValueOfFireLoad,PRN,maximumMeanBulkTemperature, +\n" +
                             "                           durationOfFireSurround,timeReachMaximumMeanBulkTemperature,maximumAverageTemperatureOfWallSurface, +\n" +
                             "                           timeToReachMaximumTemperatureOfWallSurface,averageMaximumTemperatureOfSlab, +\n" +
                             "                           timeToReachMaximumTemperatureOfSlabSurface) "+
-                            "VALUES ("+position+","+name+","+square+","+height+","+perimeter+","+volume+","+squareOfConstruction+
+                            "VALUES (`"+positionOfRoom+"`,`"+nameOfRoom+"`,"+square+","+height+","+perimeter+","+volume+","+squareOfConstruction+
                             ","+specificFireLoad+","+reducedHeightOfApertures+","+generalSquareOfApertures+","+ventilationParameter+
                             ","+coefficientK+","+coefficientA+","+coefficientB+","+coefficientS+","+
                             estimatedFireLoad+","+proemnostOfRoom+","+averageAmountOfCombustionAir+","+
@@ -98,15 +98,15 @@ public class Insert {
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "INSERT INTO room (position, name, square,height,perimeter,volume,squareOfConstruction,specificFireLoad," +
+                    "INSERT INTO room (positionOfRoom, nameOfRoom, square,height,perimeter,volume,squareOfConstruction,specificFireLoad," +
                             "reducedHeightOfApertures,generalSquareOfApertures,ventilationParameter,coefficientK,coefficientA," +
                             "coefficientB,coefficientS,estimatedFireLoad,proemnostOfRoom,averageAmountOfCombustionAir," +
                             "specificCriticalAmountOfFireLoad,specificValueOfFireLoad,PRN,maximumMeanBulkTemperature," +
                             "durationOfFireSurround,timeReachMaximumMeanBulkTemperature,maximumAverageTemperatureOfWallSurface," +
                             "timeToReachMaximumTemperatureOfWallSurface,averageMaximumTemperatureOfSlab," +
                             "timeToReachMaximumTemperatureOfSlabSurface,fk.id.building) "+
-                            "VALUES ("+r.getCommonParameters().getPosition()+","+r.getCommonParameters().getName()+
-                            ","+r.getCommonParameters().getSquare()+","+r.getCommonParameters().getHeight()+","+
+                            "VALUES (`"+r.getCommonParameters().getPositionOfRoom()+"`,`"+r.getCommonParameters().getNameOfRoom()+
+                            "`,"+r.getCommonParameters().getSquare()+","+r.getCommonParameters().getHeight()+","+
                             r.getCommonParameters().getPerimeter()+","+r.getCommonParameters().getVolume()+","+
                             r.getCommonParameters().getSquareOfConstruction()+","+r.getParametersCalculatedFireLoad().getSpecificFireLoad()+
                             ","+r.getParametersCalculatedFireLoad().getReducedHeightOfApertures()+
@@ -262,7 +262,7 @@ public class Insert {
             statement.executeUpdate(
                     "INSERT INTO building (nameOfBuilding, selectedTemperatureOfRegion," +
                             "specifyingCoefficientS5,fk.id.user,fk.id.allbuildings) "+
-                            "VALUES ("+nameOfBuilding+","+selectedTemperatureOfRegion+","+
+                            "VALUES (`"+nameOfBuilding+"`,"+selectedTemperatureOfRegion+","+
                             specifyingCoefficientS5+","+id_user+","+id_allbuildings+");");
         }
         catch (Exception e){
@@ -277,7 +277,7 @@ public class Insert {
             statement.executeUpdate(
                     "INSERT INTO building (nameOfBuilding, selectedTemperatureOfRegion," +
                             "specifyingCoefficientS5,fk.id.user,fk.id.allbuildings) "+
-                            "VALUES ("+build.getNameOfBuilding()+","+build.getSelectedTemperatureOfRegion()+","+
+                            "VALUES (`"+build.getNameOfBuilding()+"`,"+build.getSelectedTemperatureOfRegion()+","+
                             build.getSpecifyingCoefficientS5()+","+id_user+","+id_allbuildings+");");
         }
         catch (Exception e){
@@ -293,7 +293,7 @@ public class Insert {
             statement.executeUpdate(
                     "INSERT INTO aperture (typeOfAperture, width," +
                             "height,count,squareOfAperture,fk.id.room) "+
-                            "VALUES ("+temp.getTypeOfAperture()+","+temp.getWidth()+","+
+                            "VALUES (`"+temp.getTypeOfAperture()+"`,"+temp.getWidth()+","+
                             temp.getHeight()+","+temp.getCount()+","+temp.getSquareOfAperture()+","+id_room+");");
         }
         catch (Exception e){
@@ -309,7 +309,7 @@ public class Insert {
             time.setTimeInMillis(System.currentTimeMillis());
                 statement.executeUpdate(
                         "INSERT INTO aperture (dateofbuilding) "+
-                                "VALUES ("+time.get(time.HOUR_OF_DAY)+":"+time.get(time.MINUTE)+" "+time.get(time.DATE)+"-"+(time.get(time.MONTH)+1)+"-"+time.get(time.YEAR)+");");
+                                "VALUES (`"+time.get(time.HOUR_OF_DAY)+":"+time.get(time.MINUTE)+" "+time.get(time.DATE)+"-"+(time.get(time.MONTH)+1)+"-"+time.get(time.YEAR)+"`);");
         }
         catch (Exception e){
             e.printStackTrace();

@@ -44,14 +44,14 @@ public class Update {
             e.printStackTrace();
         }
     }
-    public static void UpdToFlammableSubstance(String name,Double amountOfCombustionAir,Double combustionHeat,Double averageSpeedBurnout,Integer id_substance){
+    public static void UpdToFlammableSubstance(String nameOfSubstance,Double amountOfCombustionAir,Double combustionHeat,Double averageSpeedBurnout,Integer id_substance){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "UPDATE flammablesubstance SET name="+name+",SET amountOfCombustionAir="+amountOfCombustionAir+"," +
+                    "UPDATE flammablesubstance SET nameOfSubstance="+nameOfSubstance+",SET amountOfCombustionAir="+amountOfCombustionAir+"," +
                             "SET combustionHeat="+combustionHeat+",SET averageSpeedBurnout="+averageSpeedBurnout+" "+
                             "WHERE id.substance="+id_substance+" ;");
         }
@@ -101,7 +101,7 @@ public class Update {
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "UPDATE room SET position="+r.getCommonParameters().getPosition()+",SET name="+r.getCommonParameters().getName()+
+                    "UPDATE room SET positionOfRoom="+r.getCommonParameters().getPositionOfRoom()+",SET nameOfRoom="+r.getCommonParameters().getNameOfRoom()+
                             ",SET square="+r.getCommonParameters().getSquare()+",SET height="+r.getCommonParameters().getHeight()+
                             ",SET perimeter="+r.getCommonParameters().getPerimeter()+"," +
                             "SET volume="+r.getCommonParameters().getVolume()+
