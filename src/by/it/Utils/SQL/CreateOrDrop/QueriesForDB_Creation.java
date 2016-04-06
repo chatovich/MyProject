@@ -1,6 +1,6 @@
-package by.it.Utils.JD03_01.CreateOrDrop;
+package by.it.Utils.SQL.CreateOrDrop;
 
-import by.it.Utils.JD03_01.OtherSqlMethods.Insert;
+import by.it.Utils.SQL.OtherSqlMethods.Insert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,10 +11,6 @@ import java.util.Calendar;
  * methods for DB creation and update
  */
 public class QueriesForDB_Creation {
-
-    public static void createSchema (Statement statement) throws Exception {
-        statement.executeUpdate("CREATE SCHEMA `engineering1` DEFAULT CHARACTER SET utf8 ;");
-    }
 
     public static void createTable(Statement statement) throws Exception {
 
@@ -205,12 +201,12 @@ public class QueriesForDB_Creation {
     }
 
     public static void insertData () throws SQLException {
-        Insert.addToFlammableSubstance("Drevesina", 4.2, 13.8, 2.4);
-        Insert.addToFlammableSubstance("Izolyciya provodov, kabeley PVH", 13.05, 33.5, 3.73);
-        Insert.addToFlammableSubstance("Maslo", 10.5, 42.3, 2.1);
-        Insert.addToFlammableSubstance("Plastmassa (Polyetilen)", 11.42,47.14, 0.62);
-        Insert.addToFlammableSubstance("RTI", 13.18, 33.52, 0.9);
-        Insert.addToFlammableSubstance("Tekstilnie izdeliya",2.12,16.7,1.44);
+        Insert.addToFlammableSubstance("Древесина", 4.2, 13.8, 2.4);
+        Insert.addToFlammableSubstance("Изоляция проводов, кабелей ПВХ", 13.05, 33.5, 3.73);
+        Insert.addToFlammableSubstance("Масло", 10.5, 42.3, 2.1);
+        Insert.addToFlammableSubstance("Пластмасса (Полиэтилен)", 11.42,47.14, 0.62);
+        Insert.addToFlammableSubstance("РТИ", 13.18, 33.52, 0.9);
+        Insert.addToFlammableSubstance("Текстильные изделия",2.12,16.7,1.44);
         Insert.addToUsers("henk","guevara333","henk@pochta.ru",true);
     }
 

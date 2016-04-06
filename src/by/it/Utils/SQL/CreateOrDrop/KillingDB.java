@@ -1,10 +1,9 @@
-package by.it.Utils.JD03_01.CreateOrDrop;
+package by.it.Utils.SQL.CreateOrDrop;
 
-import by.it.Utils.JD03_01.CN;
+import by.it.Utils.SQL.CN;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -16,7 +15,7 @@ public class KillingDB {
 
         try(Connection connection = DriverManager.getConnection(CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
             Statement statement = connection.createStatement()) {
-             //statement.executeUpdate("drop database engineering1;");
+            // statement.executeUpdate("drop database engineering1;");
 
             statement.executeUpdate("drop table changesinmeanbulktemperature;");
             statement.executeUpdate("drop table changeinaveragetemperatureofwalls;");

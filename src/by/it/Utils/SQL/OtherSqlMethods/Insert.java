@@ -1,6 +1,6 @@
-package by.it.Utils.JD03_01.OtherSqlMethods;
+package by.it.Utils.SQL.OtherSqlMethods;
 
-import by.it.Utils.JD03_01.CN;
+import by.it.Utils.SQL.CN;
 import by.it.generate.Aperture;
 import by.it.generate.Building;
 import by.it.generate.Room;
@@ -21,8 +21,8 @@ public class Insert {
              Statement statement=connection.createStatement()) {
 
                 statement.executeUpdate(
-                    "INSERT INTO users (login, password, email,admin) "+
-                            "VALUES (`"+login+"`,`"+password+"`,`"+email+"`,"+admin+");");
+                    "INSERT INTO users (`login`, `password`, `email`,`admin`) "+
+                            "VALUES ('"+login+"','"+password+"','"+email+"',"+admin+");");
             }
         catch (Exception e){
             e.printStackTrace();
@@ -35,8 +35,8 @@ public class Insert {
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "INSERT INTO substancesofroom (fk.id.substance, fk.id.room, weight) "+
-                            "VALUES ("+id_substance+","+id_room+","+weight+");");
+                    "INSERT INTO substancesofroom (`fk.id.substance`, `fk.id.room`, `weight`) "+
+                            "VALUES ('"+id_substance+"','"+id_room+"','"+weight+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -49,14 +49,14 @@ public class Insert {
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "INSERT INTO flammablesubstance (nameOfSubstance, amountOfCombustionAir,combustionHeat,averageSpeedBurnout) "+
-                            "VALUES (`"+nameOfSubstance+"`,"+amountOfCombustionAir+","+combustionHeat+","+averageSpeedBurnout+");");
+                    "INSERT INTO flammablesubstance (`nameOfSubstance`,`amountOfCombustionAir`,`combustionHeat`,`averageSpeedBurnout`) "+
+                            "VALUES ('"+nameOfSubstance+"','"+amountOfCombustionAir+"','"+combustionHeat+"','"+averageSpeedBurnout+"');");
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
-    public static void addToRoom(String positionOfRoom, String nameOfRoom, Double square, Double height, Double perimeter,
+  /*  public static void addToRoom(String positionOfRoom, String nameOfRoom, Double square, Double height, Double perimeter,
                                  Double volume, Double squareOfConstruction, Double specificFireLoad, Double reducedHeightOfApertures,
                                  Double generalSquareOfApertures, Double ventilationParameter, Double coefficientK, Double coefficientA,
                                  Double coefficientB, Double coefficientS, Double estimatedFireLoad, Double proemnostOfRoom,
@@ -90,7 +90,7 @@ public class Insert {
         catch (Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
     public static void addToRoom(Room r, Integer id_building){
         try (Connection connection=
                      DriverManager.getConnection
@@ -98,32 +98,32 @@ public class Insert {
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "INSERT INTO room (positionOfRoom, nameOfRoom, square,height,perimeter,volume,squareOfConstruction,specificFireLoad," +
-                            "reducedHeightOfApertures,generalSquareOfApertures,ventilationParameter,coefficientK,coefficientA," +
-                            "coefficientB,coefficientS,estimatedFireLoad,proemnostOfRoom,averageAmountOfCombustionAir," +
-                            "specificCriticalAmountOfFireLoad,specificValueOfFireLoad,PRN,maximumMeanBulkTemperature," +
-                            "durationOfFireSurround,timeReachMaximumMeanBulkTemperature,maximumAverageTemperatureOfWallSurface," +
-                            "timeToReachMaximumTemperatureOfWallSurface,averageMaximumTemperatureOfSlab," +
-                            "timeToReachMaximumTemperatureOfSlabSurface,fk.id.building) "+
-                            "VALUES (`"+r.getCommonParameters().getPositionOfRoom()+"`,`"+r.getCommonParameters().getNameOfRoom()+
-                            "`,"+r.getCommonParameters().getSquare()+","+r.getCommonParameters().getHeight()+","+
-                            r.getCommonParameters().getPerimeter()+","+r.getCommonParameters().getVolume()+","+
-                            r.getCommonParameters().getSquareOfConstruction()+","+r.getParametersCalculatedFireLoad().getSpecificFireLoad()+
-                            ","+r.getParametersCalculatedFireLoad().getReducedHeightOfApertures()+
-                            ","+r.getParametersCalculatedFireLoad().getGeneralSquareOfApertures()+","+
-                            r.getParametersCalculatedFireLoad().getVentilationParameter()+","+r.getParametersCalculatedFireLoad().getCoefficientK()+","+
-                            r.getParametersCalculatedFireLoad().getCoefficientA()+","+r.getParametersCalculatedFireLoad().getCoefficientB()+","+
-                            r.getParametersCalculatedFireLoad().getCoefficientS()+","+r.getParametersCalculatedFireLoad().getEstimatedFireLoad()+","+
-                            r.getDetermineTheTypeOfFire().getProemnostOfRoom()+","+r.getDetermineTheTypeOfFire().getAverageAmountOfCombustionAir()+","+
+                    "INSERT INTO room (`positionOfRoom`,`nameOfRoom`,`square`,`height`,`perimeter`,`volume`,`squareOfConstruction`,`specificFireLoad`," +
+                            "`reducedHeightOfApertures`,`generalSquareOfApertures`,`ventilationParameter`,`coefficientK`,`coefficientA`," +
+                            "`coefficientB`,`coefficientS`,`estimatedFireLoad`,`proemnostOfRoom`,`averageAmountOfCombustionAir`," +
+                            "`specificCriticalAmountOfFireLoad`,`specificValueOfFireLoad`,`PRN`,`maximumMeanBulkTemperature`," +
+                            "`durationOfFireSurround`,`timeReachMaximumMeanBulkTemperature`,`maximumAverageTemperatureOfWallSurface`," +
+                            "`timeToReachMaximumTemperatureOfWallSurface`,`averageMaximumTemperatureOfSlab`," +
+                            "`timeToReachMaximumTemperatureOfSlabSurface`,`fk.id.building`) "+
+                            "VALUES ('"+r.getCommonParameters().getPositionOfRoom()+"','"+r.getCommonParameters().getNameOfRoom()+
+                            "','"+r.getCommonParameters().getSquare()+"','"+r.getCommonParameters().getHeight()+"','"+
+                            r.getCommonParameters().getPerimeter()+"','"+r.getCommonParameters().getVolume()+"','"+
+                            r.getCommonParameters().getSquareOfConstruction()+"','"+r.getParametersCalculatedFireLoad().getSpecificFireLoad()+
+                            "','"+r.getParametersCalculatedFireLoad().getReducedHeightOfApertures()+
+                            "','"+r.getParametersCalculatedFireLoad().getGeneralSquareOfApertures()+"','"+
+                            r.getParametersCalculatedFireLoad().getVentilationParameter()+"','"+r.getParametersCalculatedFireLoad().getCoefficientK()+"','"+
+                            r.getParametersCalculatedFireLoad().getCoefficientA()+"','"+r.getParametersCalculatedFireLoad().getCoefficientB()+"','"+
+                            r.getParametersCalculatedFireLoad().getCoefficientS()+"','"+r.getParametersCalculatedFireLoad().getEstimatedFireLoad()+"','"+
+                            r.getDetermineTheTypeOfFire().getProemnostOfRoom()+"','"+r.getDetermineTheTypeOfFire().getAverageAmountOfCombustionAir()+"','"+
                             r.getDetermineTheTypeOfFire().getSpecificCriticalAmountOfFireLoad()+
-                            ","+r.getDetermineTheTypeOfFire().getSpecificValueOfFireLoad()+","+r.getDetermineTheTypeOfFire().isPRN()+","+
-                            r.getIntegratedThermalAndTechnicalParameters().getMaximumMeanBulkTemperature()+","+
-                            r.getIntegratedThermalAndTechnicalParameters().getDurationOfFireSurround()+","+
+                            "','"+r.getDetermineTheTypeOfFire().getSpecificValueOfFireLoad()+"','"+r.getDetermineTheTypeOfFire().isPRN()+"','"+
+                            r.getIntegratedThermalAndTechnicalParameters().getMaximumMeanBulkTemperature()+"','"+
+                            r.getIntegratedThermalAndTechnicalParameters().getDurationOfFireSurround()+"','"+
                             r.getIntegratedThermalAndTechnicalParameters().getTimeReachMaximumMeanBulkTemperature()+
-                            ","+r.getIntegratedThermalAndTechnicalParameters().getMaximumAverageTemperatureOfWallSurface()+","+
-                            r.getIntegratedThermalAndTechnicalParameters().getTimeToReachMaximumTemperatureOfWallSurface()+","+
-                            r.getIntegratedThermalAndTechnicalParameters().getAverageMaximumTemperatureOfSlab()+","+
-                            r.getIntegratedThermalAndTechnicalParameters().getTimeToReachMaximumTemperatureOfSlabSurface()+","+id_building+");");
+                            "','"+r.getIntegratedThermalAndTechnicalParameters().getMaximumAverageTemperatureOfWallSurface()+"','"+
+                            r.getIntegratedThermalAndTechnicalParameters().getTimeToReachMaximumTemperatureOfWallSurface()+"','"+
+                            r.getIntegratedThermalAndTechnicalParameters().getAverageMaximumTemperatureOfSlab()+"','"+
+                            r.getIntegratedThermalAndTechnicalParameters().getTimeToReachMaximumTemperatureOfSlabSurface()+"','"+id_building+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -136,8 +136,8 @@ public class Insert {
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "INSERT INTO coefficientsforroom (fk.id.room, s1,s4,s7,s8,s9,s10) "+
-                            "VALUES ("+id_room+","+s1+","+s4+","+s7+","+s8+","+s9+","+s10+");");
+                    "INSERT INTO coefficientsforroom (`fk.id.room`,`s1`,`s4`,`s7`,`s8`,`s9`,`s10`) "+
+                            "VALUES ('"+id_room+"','"+s1+"','"+s4+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -150,8 +150,8 @@ public class Insert {
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "INSERT INTO coefficientsforroom (fk.id.room, s1,s4,s7,s8,s9,s10) "+
-                            "VALUES ("+id_room+","+s.get(0)+","+s.get(1)+","+s.get(2)+","+s.get(3)+","+s.get(4)+","+s.get(5)+");");
+                    "INSERT INTO coefficientsforroom (`fk.id.room`,`s1`,`s4`,`s7`,`s8`,`s9`,`s10`) "+
+                            "VALUES ('"+id_room+"','"+s.get(0)+"','"+s.get(1)+"','"+s.get(2)+"','"+s.get(3)+"','"+s.get(4)+"','"+s.get(5)+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -164,8 +164,8 @@ public class Insert {
              Statement statement=connection.createStatement()) {
 
             statement.executeUpdate(
-                    "INSERT INTO coefficientsforbuilding (fk.id.building, s2,s3,s5,s6) "+
-                            "VALUES ("+id_building+","+s2+","+s3+","+s5+","+s6+");");
+                    "INSERT INTO coefficientsforbuilding (`fk.id.building`,`s2`,`s3`,`s5`,`s6`) "+
+                            "VALUES ('"+id_building+"','"+s2+"','"+s3+"','"+s5+"','"+s6+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -177,8 +177,8 @@ public class Insert {
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
              Statement statement=connection.createStatement()) {
             statement.executeUpdate(
-                    "INSERT INTO coefficientsforbuilding (fk.id.building, s2,s3,s5,s6) "+
-                            "VALUES ("+id_building+","+s.get(0)+","+s.get(1)+","+s.get(2)+","+s.get(3)+");");
+                    "INSERT INTO coefficientsforbuilding (`fk.id.building`,`s2`,`s3`,`s5`,`s6`) "+
+                            "VALUES ('"+id_building+"','"+s.get(0)+"','"+s.get(1)+"','"+s.get(2)+"','"+s.get(3)+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -191,17 +191,17 @@ public class Insert {
              Statement statement=connection.createStatement()) {
             StringBuilder sb=new StringBuilder();
             for (int i=0;i<t.size();i++){
-                StringBuilder sb1=new StringBuilder(",t"+i);
+                StringBuilder sb1=new StringBuilder(",`t"+i+"`");
                 sb.append(sb1);
             }
             StringBuilder sb1=new StringBuilder();
             for (Double temp:t){
-                StringBuilder sb2=new StringBuilder(","+temp);
+                StringBuilder sb2=new StringBuilder(",'"+temp+"'");
                 sb1.append(sb2);
             }
             statement.executeUpdate(
-                    "INSERT INTO changesinmeanbulktemperature (fk.id.room"+sb+") "+
-                            "VALUES ("+id_room+sb1+");");
+                    "INSERT INTO changesinmeanbulktemperature (`fk.id.room`"+sb+") "+
+                            "VALUES ('"+id_room+"'"+sb1+");");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -214,17 +214,17 @@ public class Insert {
              Statement statement=connection.createStatement()) {
             StringBuilder sb=new StringBuilder();
             for (int i=0;i<t.size();i++){
-                StringBuilder sb1=new StringBuilder(",t"+i);
+                StringBuilder sb1=new StringBuilder(",`t"+i+"`");
                 sb.append(sb1);
             }
             StringBuilder sb1=new StringBuilder();
             for (Double temp:t){
-                StringBuilder sb2=new StringBuilder(","+temp);
+                StringBuilder sb2=new StringBuilder(",'"+temp+"'");
                 sb1.append(sb2);
             }
             statement.executeUpdate(
-                    "INSERT INTO changeinaveragetemperatureofwalls (fk.id.room"+sb+") "+
-                            "VALUES ("+id_room+sb1+");");
+                    "INSERT INTO changeinaveragetemperatureofwalls (`fk.id.room`"+sb+") "+
+                            "VALUES ('"+id_room+"'"+sb1+");");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -237,17 +237,17 @@ public class Insert {
              Statement statement=connection.createStatement()) {
             StringBuilder sb=new StringBuilder();
             for (int i=0;i<t.size();i++){
-                StringBuilder sb1=new StringBuilder(",t"+i);
+                StringBuilder sb1=new StringBuilder(",`t"+i+"`");
                 sb.append(sb1);
             }
             StringBuilder sb1=new StringBuilder();
             for (Double temp:t){
-                StringBuilder sb2=new StringBuilder(","+temp);
+                StringBuilder sb2=new StringBuilder(",'"+temp+"'");
                 sb1.append(sb2);
             }
             statement.executeUpdate(
-                    "INSERT INTO changeinaveragetemperatureofslab (fk.id.room"+sb+") "+
-                            "VALUES ("+id_room+sb1+");");
+                    "INSERT INTO changeinaveragetemperatureofslab (`fk.id.room`"+sb+") "+
+                            "VALUES ('"+id_room+"'"+sb1+");");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -260,10 +260,10 @@ public class Insert {
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
              Statement statement=connection.createStatement()) {
             statement.executeUpdate(
-                    "INSERT INTO building (nameOfBuilding, selectedTemperatureOfRegion," +
-                            "specifyingCoefficientS5,fk.id.user,fk.id.allbuildings) "+
-                            "VALUES (`"+nameOfBuilding+"`,"+selectedTemperatureOfRegion+","+
-                            specifyingCoefficientS5+","+id_user+","+id_allbuildings+");");
+                    "INSERT INTO building (`nameOfBuilding`, `selectedTemperatureOfRegion`," +
+                            "`specifyingCoefficientS5`,`fk.id.user`,`fk.id.allbuildings`) "+
+                            "VALUES ('"+nameOfBuilding+"','"+selectedTemperatureOfRegion+"','"+
+                            specifyingCoefficientS5+"','"+id_user+"','"+id_allbuildings+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -275,10 +275,10 @@ public class Insert {
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
              Statement statement=connection.createStatement()) {
             statement.executeUpdate(
-                    "INSERT INTO building (nameOfBuilding, selectedTemperatureOfRegion," +
-                            "specifyingCoefficientS5,fk.id.user,fk.id.allbuildings) "+
-                            "VALUES (`"+build.getNameOfBuilding()+"`,"+build.getSelectedTemperatureOfRegion()+","+
-                            build.getSpecifyingCoefficientS5()+","+id_user+","+id_allbuildings+");");
+                    "INSERT INTO building (`nameOfBuilding`,`selectedTemperatureOfRegion`," +
+                            "`specifyingCoefficientS5`,`fk.id.user`,`fk.id.allbuildings`) "+
+                            "VALUES ('"+build.getNameOfBuilding()+"','"+build.getSelectedTemperatureOfRegion()+"','"+
+                            build.getSpecifyingCoefficientS5()+"','"+id_user+"','"+id_allbuildings+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -291,10 +291,10 @@ public class Insert {
              Statement statement=connection.createStatement()) {
             for (Aperture temp:ap)
             statement.executeUpdate(
-                    "INSERT INTO aperture (typeOfAperture, width," +
-                            "height,count,squareOfAperture,fk.id.room) "+
-                            "VALUES (`"+temp.getTypeOfAperture()+"`,"+temp.getWidth()+","+
-                            temp.getHeight()+","+temp.getCount()+","+temp.getSquareOfAperture()+","+id_room+");");
+                    "INSERT INTO aperture (`typeOfAperture`,`width`," +
+                            "`height`,`count`,`squareOfAperture`,`fk.id.room`) "+
+                            "VALUES ('"+temp.getTypeOfAperture()+"','"+temp.getWidth()+"','"+
+                            temp.getHeight()+"','"+temp.getCount()+"','"+temp.getSquareOfAperture()+"','"+id_room+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -308,8 +308,8 @@ public class Insert {
             GregorianCalendar time = new GregorianCalendar();
             time.setTimeInMillis(System.currentTimeMillis());
                 statement.executeUpdate(
-                        "INSERT INTO aperture (dateofbuilding) "+
-                                "VALUES (`"+time.get(time.HOUR_OF_DAY)+":"+time.get(time.MINUTE)+" "+time.get(time.DATE)+"-"+(time.get(time.MONTH)+1)+"-"+time.get(time.YEAR)+"`);");
+                        "INSERT INTO aperture (`dateofbuilding`) "+
+                                "VALUES ('"+(time.get(time.YEAR))+"-"+(time.get(time.MONTH)+1)+"-"+(time.get(time.DATE))+" "+(time.get(time.HOUR_OF_DAY))+":"+(time.get(time.MINUTE))+":"+(time.get(time.MINUTE))+"');");
         }
         catch (Exception e){
             e.printStackTrace();

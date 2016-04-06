@@ -1,6 +1,6 @@
-package by.it.Utils.JD03_01.OtherSqlMethods;
+package by.it.Utils.SQL.OtherSqlMethods;
 
-import by.it.Utils.JD03_01.CN;
+import by.it.Utils.SQL.CN;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
-    <file url="file://$PROJECT_DIR$/src/by/it/Utils/JD03_01/sql/insert__admin.sql" charset="ISO-8859-1" />
-    <file url="file://$PROJECT_DIR$/src/by/it/Utils/JD03_01/sql/insert__user.sql" charset="ISO-8859-1" />
-    <file url="file://$PROJECT_DIR$/src/by/it/Utils/JD03_01/sql/select__users.sql" charset="ISO-8859-1" />
-    <file url="file://$PROJECT_DIR$/src/by/it/Utils/JD03_01/sql/select_ad.sql" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/by/it/Utils/SQL/sql/insert__admin.sql" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/by/it/Utils/SQL/sql/insert__user.sql" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/by/it/Utils/SQL/sql/select__users.sql" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/by/it/Utils/SQL/sql/select_ad.sql" charset="ISO-8859-1" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
