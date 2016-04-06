@@ -254,31 +254,33 @@ public class Insert {
         }
     }
     public static void addToBuilding(String nameOfBuilding, Double selectedTemperatureOfRegion,
-                                     Double specifyingCoefficientS5, Integer id_user, Integer id_allbuildings){
+                                     Double specifyingCoefficientS5, Integer id_user){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
              Statement statement=connection.createStatement()) {
             statement.executeUpdate(
                     "INSERT INTO building (`nameOfBuilding`, `selectedTemperatureOfRegion`," +
-                            "`specifyingCoefficientS5`,`fk.id.user`,`fk.id.allbuildings`) "+
+                            "`specifyingCoefficientS5`,`fk.id.user`) "+
                             "VALUES ('"+nameOfBuilding+"','"+selectedTemperatureOfRegion+"','"+
-                            specifyingCoefficientS5+"','"+id_user+"','"+id_allbuildings+"');");
+                            specifyingCoefficientS5+"','"+id_user+"');");
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
-    public static void addToBuilding(Building build, Integer id_user, Integer id_allbuildings){
+    public static void addToBuilding(Building build, Integer id_user){
         try (Connection connection=
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
-             Statement statement=connection.createStatement()) {
+             Statement statement=connection.createStatement())
+        { GregorianCalendar time = new GregorianCalendar();
+            time.setTimeInMillis(System.currentTimeMillis());
             statement.executeUpdate(
                     "INSERT INTO building (`nameOfBuilding`,`selectedTemperatureOfRegion`," +
-                            "`specifyingCoefficientS5`,`fk.id.user`,`fk.id.allbuildings`) "+
+                            "`specifyingCoefficientS5`,`fk.id.user`,`fk.id.allbuildings`,`dateofbuilding`) "+
                             "VALUES ('"+build.getNameOfBuilding()+"','"+build.getSelectedTemperatureOfRegion()+"','"+
-                            build.getSpecifyingCoefficientS5()+"','"+id_user+"','"+id_allbuildings+"');");
+                            build.getSpecifyingCoefficientS5()+"','"+id_user+"','"+(time.get(time.YEAR))+"-"+(time.get(time.MONTH)+1)+"-"+(time.get(time.DATE))+" "+(time.get(time.HOUR_OF_DAY))+":"+(time.get(time.MINUTE))+":"+(time.get(time.MINUTE))+"');");
         }
         catch (Exception e){
             e.printStackTrace();
@@ -295,21 +297,6 @@ public class Insert {
                             "`height`,`count`,`squareOfAperture`,`fk.id.room`) "+
                             "VALUES ('"+temp.getTypeOfAperture()+"','"+temp.getWidth()+"','"+
                             temp.getHeight()+"','"+temp.getCount()+"','"+temp.getSquareOfAperture()+"','"+id_room+"');");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    public static void addToAllBuildings(){
-        try (Connection connection=
-                     DriverManager.getConnection
-                             (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
-             Statement statement=connection.createStatement()) {
-            GregorianCalendar time = new GregorianCalendar();
-            time.setTimeInMillis(System.currentTimeMillis());
-                statement.executeUpdate(
-                        "INSERT INTO aperture (`dateofbuilding`) "+
-                                "VALUES ('"+(time.get(time.YEAR))+"-"+(time.get(time.MONTH)+1)+"-"+(time.get(time.DATE))+" "+(time.get(time.HOUR_OF_DAY))+":"+(time.get(time.MINUTE))+":"+(time.get(time.MINUTE))+"');");
         }
         catch (Exception e){
             e.printStackTrace();

@@ -161,16 +161,16 @@ public class TableWithMergedCells {
             temp = new ArrayList<>();
             temp.add(room.getCommonParameters().getPositionOfRoom());
             temp.add(room.getCommonParameters().getNameOfRoom());
-            temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getSelectedSs().get(0)));
-            temp.add(String.valueOf(build.getCoefficientSForBuild().get(0)));
-            temp.add(String.valueOf(build.getCoefficientSForBuild().get(1)));
-            temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getSelectedSs().get(1)));
-            temp.add(String.valueOf(build.getCoefficientSForBuild().get(2)));
-            temp.add(String.valueOf(build.getCoefficientSForBuild().get(3)));
-            temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getSelectedSs().get(2)));
-            temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getSelectedSs().get(3)));
-            temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getSelectedSs().get(4)));
-            temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getSelectedSs().get(5)));
+            temp.add(String.valueOf(room.getCoefficientSForRoom().getS().get(0)));
+            temp.add(String.valueOf(build.getCoefficientSForBuild().getS().get(0)));
+            temp.add(String.valueOf(build.getCoefficientSForBuild().getS().get(1)));
+            temp.add(String.valueOf(room.getCoefficientSForRoom().getS().get(1)));
+            temp.add(String.valueOf(build.getCoefficientSForBuild().getS().get(2)));
+            temp.add(String.valueOf(build.getCoefficientSForBuild().getS().get(3)));
+            temp.add(String.valueOf(room.getCoefficientSForRoom().getS().get(2)));
+            temp.add(String.valueOf(room.getCoefficientSForRoom().getS().get(3)));
+            temp.add(String.valueOf(room.getCoefficientSForRoom().getS().get(4)));
+            temp.add(String.valueOf(room.getCoefficientSForRoom().getS().get(5)));
         }
         return table;
     }
@@ -194,27 +194,29 @@ public class TableWithMergedCells {
         addTableRowWithMergedCells(temp, table);
 
         for (Room room : build.getRoom()) {//печатаем первую строку с первым материалом
+            if (room.getSubstancesOfRoom().size()==0)
+                continue;
             temp=new ArrayList<>();
             temp.add(room.getCommonParameters().getPositionOfRoom());
             temp.add(room.getCommonParameters().getNameOfRoom());
-            temp.add(room.getFlammableSubstance().get(0).getNameOfSubstance());
-            temp.add(String.valueOf(room.getFlammableSubstance().get(0).getWeight()));
-            temp.add(String.valueOf(room.getFlammableSubstance().get(0).getAmountOfCombustionAir()));
+            temp.add(room.getSubstancesOfRoom().get(0).getFlammableSubstance().getNameOfSubstance());
+            temp.add(String.valueOf(room.getSubstancesOfRoom().get(0).getWeight()));
+            temp.add(String.valueOf(room.getSubstancesOfRoom().get(0).getFlammableSubstance().getAmountOfCombustionAir()));
             temp.add(String.valueOf(room.getDetermineTheTypeOfFire().getAverageAmountOfCombustionAir()));
-            temp.add(String.valueOf(room.getFlammableSubstance().get(0).getAverageSpeedBurnout()));
+            temp.add(String.valueOf(room.getSubstancesOfRoom().get(0).getFlammableSubstance().getAverageSpeedBurnout()));
 
             addTableRowWithMergedCells(temp, table);
 
-            if (room.getFlammableSubstance().size() > 1) {//если есть еще проемы - добавляем их
-                for (int i = 1; i < room.getFlammableSubstance().size(); i++) {
+            if (room.getSubstancesOfRoom().size() > 1) {//если есть еще проемы - добавляем их
+                for (int i = 1; i < room.getSubstancesOfRoom().size(); i++) {
                     temp=new ArrayList<>();
                     temp.add(null);
                     temp.add(null);
-                    temp.add(room.getFlammableSubstance().get(0).getNameOfSubstance());
-                    temp.add(String.valueOf(room.getFlammableSubstance().get(0).getWeight()));
-                    temp.add(String.valueOf(room.getFlammableSubstance().get(0).getAmountOfCombustionAir()));
+                    temp.add(room.getSubstancesOfRoom().get(0).getFlammableSubstance().getNameOfSubstance());
+                    temp.add(String.valueOf(room.getSubstancesOfRoom().get(0).getWeight()));
+                    temp.add(String.valueOf(room.getSubstancesOfRoom().get(0).getFlammableSubstance().getAmountOfCombustionAir()));
                     temp.add(null);
-                    temp.add(String.valueOf(room.getFlammableSubstance().get(0).getAverageSpeedBurnout()));
+                    temp.add(String.valueOf(room.getSubstancesOfRoom().get(0).getFlammableSubstance().getAverageSpeedBurnout()));
 
                     addTableRowWithMergedCells(temp, table);
                 }

@@ -22,21 +22,18 @@ class DAO {
      Connection getConnection(){
         return connection;
     }
+
     static void closeDAO() throws SQLException {   //метод, который уничтожает DAO
         dao.connection.close();
         dao = null; //Тут можно тоже закрывать соединение.
     }
 
     //Create Update Delete
-    static int executeUpdate(String sql) {
+    static int executeUpdate(String sql) throws SQLException {
         //System.out.println("--- SQL="+sql); //отладка
         int result = -1;
-        try (Connection connection = Xampp.getConnection();
-             Statement statement = connection.createStatement();) {
+            Statement statement = dao.connection.createStatement();
             result = statement.executeUpdate(sql);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return result;
     }
 }

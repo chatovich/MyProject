@@ -1,9 +1,6 @@
 package by.it.generate.functional;
 
-import by.it.generate.Aperture;
-import by.it.generate.Building;
-import by.it.generate.FlammableSubstance;
-import by.it.generate.Room;
+import by.it.generate.*;
 
 import static by.it.Utils.Rounding.myRound;
 import static java.lang.Math.pow;
@@ -73,11 +70,11 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
      * Функция нахождения среднего количества воздуха для сгорания
      */
     public Double findAverageAmountOfCombustionAir(Room myRoom){
-        if (myRoom.getFlammableSubstance().size()==0)
+        if (myRoom.getSubstancesOfRoom().size()==0)
             return 4.2;
         Double numerator=0.0;
         Double denominator=0.0;
-        for (FlammableSubstance temp:myRoom.getFlammableSubstance()){
+        for (SubstancesOfRoom temp:myRoom.getSubstancesOfRoom()){
       ///////      numerator+=temp.getWeight()*temp.getAmountOfCombustionAir();
             denominator+=temp.getWeight();
         }
@@ -125,17 +122,17 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
                 sqrt(myRoom.getParametersCalculatedFireLoad().getReducedHeightOfApertures());
         firstFraction=numerator/denominator;
 
-        if (myRoom.getFlammableSubstance().size()==0)
+        if (myRoom.getSubstancesOfRoom().size()==0)
             secondFraction=1.0;
         else {
             numerator = 0.0;
             denominator = 0.0;
-            for (FlammableSubstance temp : myRoom.getFlammableSubstance())
+            for (SubstancesOfRoom temp : myRoom.getSubstancesOfRoom())
                 numerator += (temp.getWeight());
 
             numerator *= 2.4;
-            for (FlammableSubstance temp : myRoom.getFlammableSubstance())
-                denominator += (temp.getWeight() * temp.getAverageSpeedBurnout());
+            for (SubstancesOfRoom temp : myRoom.getSubstancesOfRoom())
+                denominator += (temp.getWeight() * temp.getFlammableSubstance().getAverageSpeedBurnout());
 
             secondFraction = numerator / denominator;
         }
@@ -183,7 +180,7 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
             Double fraction=(i/myRoom.getIntegratedThermalAndTechnicalParameters().getTimeReachMaximumMeanBulkTemperature());
             Double firstValue=115.6*pow(fraction,4.75);
             Double secondValue=pow(Math.E,((-4.75)*fraction));
-            myRoom.getIntegratedThermalAndTechnicalParameters().getChangesInMeanBulkTemperature().add(
+            myRoom.getChangeInMeanBulkTemperature().getChanges().add(
                     ((firstValue*secondValue)*denominator)+myBuilding.getSelectedTemperatureOfRegion());
         }
     }
@@ -228,7 +225,7 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
             Double fraction=(i/myRoom.getIntegratedThermalAndTechnicalParameters().getTimeToReachMaximumTemperatureOfWallSurface());
             Double firstValue=233*pow(fraction,5.45);
             Double secondValue=pow(Math.E,((-5.45)*fraction));
-            myRoom.getIntegratedThermalAndTechnicalParameters().getChangeInAverageTemperatureOfWalls().add(
+            myRoom.getChangeInTemperatureOfWalls().getChanges().add(
                     ((firstValue*secondValue)*denominator)+myBuilding.getSelectedTemperatureOfRegion());
         }
     }
@@ -267,7 +264,7 @@ public class DefinitionOfThermalParametersOfDevelopingFire2 {
             Double fraction=(i/myRoom.getIntegratedThermalAndTechnicalParameters().getTimeToReachMaximumTemperatureOfSlabSurface());
             Double firstValue=1043*pow(fraction,6.95);
             Double secondValue=pow(Math.E,((-6.95)*fraction));
-            myRoom.getIntegratedThermalAndTechnicalParameters().getChangeInAverageTemperatureOfSlab().add(((firstValue*secondValue)*denominator)+myBuilding.getSelectedTemperatureOfRegion());
+            myRoom.getChangeInTemperatureOfSlab().getChanges().add(((firstValue*secondValue)*denominator)+myBuilding.getSelectedTemperatureOfRegion());
         }
     }
 }

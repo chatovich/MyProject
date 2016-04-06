@@ -28,7 +28,7 @@ public class KillingDB {
             statement.executeUpdate("drop table room;");
             statement.executeUpdate("drop table building;");
             statement.executeUpdate("drop table users;");
-            statement.executeUpdate("drop table allbuildings;");
+         //   statement.executeUpdate("drop table allbuildings;");
 
             System.out.println("Tables from DB were deleted");
         } catch (Exception e) {

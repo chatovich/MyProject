@@ -2,7 +2,6 @@ package by.it.Utils;
 
 import by.it.generate.Building;
 import by.it.generate.Room;
-import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
@@ -20,7 +19,6 @@ import org.jfree.data.xy.XYSeriesCollection;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * Объект получает здание и создает изображения для каждого его помещения
@@ -47,21 +45,21 @@ public class MyChart {
     private XYDataset createDataset(Room myRoom) {
         final XYSeries series1 = new XYSeries("Среднеобъемная температура");
         int i=0;
-        for (Double temp:myRoom.getIntegratedThermalAndTechnicalParameters().getChangesInMeanBulkTemperature()) {
+        for (Double temp:myRoom.getChangeInMeanBulkTemperature().getChanges()) {
             series1.add(i, temp);
             i++;
         }
 
         final XYSeries series2 = new XYSeries("Температура перекрытия");
         i=0;
-        for (Double temp:myRoom.getIntegratedThermalAndTechnicalParameters().getChangeInAverageTemperatureOfSlab()) {
+        for (Double temp:myRoom.getChangeInTemperatureOfSlab().getChanges()) {
             series2.add(i, temp);
             i++;
         }
 
         final XYSeries series3 = new XYSeries("Температура вертикальных конструкций");
         i=0;
-        for (Double temp:myRoom.getIntegratedThermalAndTechnicalParameters().getChangeInAverageTemperatureOfWalls()) {
+        for (Double temp:myRoom.getChangeInTemperatureOfWalls().getChanges()) {
             series3.add(i, temp);
             i++;
         }

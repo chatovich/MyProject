@@ -1,10 +1,10 @@
 package by.it;
 
+import by.it.Utils.CreateReport;
 import by.it.Utils.MyChart;
 import by.it.generate.*;
 import by.it.generate.functional.AllDefinition;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 public class Main {
@@ -14,10 +14,10 @@ public class Main {
         Room r=new Room();
         b.getRoom().add(r);
         b.setNameOfBuilding("Bikini Bottom");
-        b.getCoefficientSForBuild().add(1.0);
-        b.getCoefficientSForBuild().add(0.7);
-        b.getCoefficientSForBuild().add(0.8);
-        b.getCoefficientSForBuild().add(0.73);
+        b.getCoefficientSForBuild().getS().add(1.0);
+        b.getCoefficientSForBuild().getS().add(0.7);
+        b.getCoefficientSForBuild().getS().add(0.8);
+        b.getCoefficientSForBuild().getS().add(0.73);
         b.setSpecifyingCoefficientS5(1.0);
         b.setSelectedTemperatureOfRegion(35);
         r.setCommonParameters(new CommonParameters());
@@ -32,12 +32,12 @@ public class Main {
         r.getCommonParameters().setSquare(7.27);
         r.getCommonParameters().setSquareOfConstruction(47);
         r.getCommonParameters().setVolume(21.81);
-        r.getParametersCalculatedFireLoad().getSelectedSs().add(1.0);
-        r.getParametersCalculatedFireLoad().getSelectedSs().add(1.0);
-        r.getParametersCalculatedFireLoad().getSelectedSs().add(1.0);
-        r.getParametersCalculatedFireLoad().getSelectedSs().add(1.0);
-        r.getParametersCalculatedFireLoad().getSelectedSs().add(1.0);
-        r.getParametersCalculatedFireLoad().getSelectedSs().add(1.0);
+        r.getCoefficientSForRoom().getS().add(1.0);
+        r.getCoefficientSForRoom().getS().add(1.0);
+        r.getCoefficientSForRoom().getS().add(1.0);
+        r.getCoefficientSForRoom().getS().add(1.0);
+        r.getCoefficientSForRoom().getS().add(1.0);
+        r.getCoefficientSForRoom().getS().add(1.0);
         r.getParametersCalculatedFireLoad().setSpecificFireLoadZVEZDOCHKA(71.14);
         Aperture a=new Aperture();
         r.getAperture().add(a);
@@ -58,15 +58,17 @@ public class Main {
         all.setALlParemeters(b);
         MyChart m=new MyChart(b);
         m.outputChart();
-        List<Double> res=b.getRoom().get(0).getIntegratedThermalAndTechnicalParameters().getChangeInAverageTemperatureOfSlab();
+        List<Double> res=r.getChangeInMeanBulkTemperature().getChanges();
         for (Double temp:res)
             System.out.print(temp+" ");
         System.out.println();
-        List<Double> res1=b.getRoom().get(0).getIntegratedThermalAndTechnicalParameters().getChangeInAverageTemperatureOfWalls();
+        List<Double> res1=r.getChangeInTemperatureOfSlab().getChanges();
         for (Double temp:res1)
             System.out.print(temp+" ");System.out.println();
-        List<Double> res2=b.getRoom().get(0).getIntegratedThermalAndTechnicalParameters().getChangesInMeanBulkTemperature();
+        List<Double> res2=r.getChangeInTemperatureOfWalls().getChanges();
         for (Double temp:res2)
             System.out.print(temp+" ");
+        CreateReport create=new CreateReport(b);
+        create.create("/src/by/it/ProgramCreate/Hey.docx");//////////беда с маршалом
     }
 }

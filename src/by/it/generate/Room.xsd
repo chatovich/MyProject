@@ -3,29 +3,96 @@
         targetNamespace="http://www.it.by/generate/"
         xmlns:tns="http://www.it.by/generate/"
         elementFormDefault="qualified">
-    <element name="building">
-        <complexType>
+    <element name="user">
+    <complexType>
+    <sequence>
+        <element name="id.user" type="short" />
+        <element name="login" type="string" />
+        <element name="password" type="string" />
+        <element name="email" type="string" />
+        <element name="admin" type="boolean" />
+        <element name="building" type="tns:Building" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    </complexType>
+    </element>
+
+        <complexType name="Building">
             <sequence>
                 <element name="selectedTemperatureOfRegion" type="double" />
-                <element name="coefficientSForBuild" type="double" minOccurs="4" maxOccurs="4"/>
+                <element name="coefficientSForBuild" type="tns:coefficientSForBuild"/>
                 <element name="specifyingCoefficientS5" type="double" default="1"/>
                 <element name="nameOfBuilding" type="string"/>
-                <element name="room"
-                         type="tns:Room"
-                         minOccurs="1"
-                         maxOccurs="unbounded" />
+                <element name="id.building" type="short"/>
+                <element name="fk.id.user" type="short"/>
+                <element name="dateOfBuilding" type="string"/>
+                <element name="room" type="tns:Room" minOccurs="1" maxOccurs="unbounded" />
             </sequence>
-
         </complexType>
-    </element>
+
+    <complexType name="coefficientSForBuild">
+        <sequence>
+            <element name="id.coefficientSForBuild" type="short" />
+            <element name="fk.id.building" type="short" />
+            <element name="s" type="double" minOccurs="4" maxOccurs="4"/>
+        </sequence>
+    </complexType>
+
     <complexType name="Room">
         <sequence>
+            <element name="id.room" type="short"/>
+            <element name="fk.id.building" type="short"/>
             <element name="commonParameters" type="tns:CommonParameters"/>
+            <element name="coefficientSForRoom" type="tns:CoefficientSForRoom"/>
             <element name="aperture" type="tns:Aperture" minOccurs="1" maxOccurs="unbounded"/>
             <element name="parametersCalculatedFireLoad" type="tns:ParametersCalculatedFireLoad"/>
-            <element name="flammableSubstance" type="tns:FlammableSubstance" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="substancesOfRoom" type="tns:SubstancesOfRoom" minOccurs="0" maxOccurs="unbounded"/>
             <element name="determineTheTypeOfFire" type="tns:DetermineTheTypeOfFire"/>
             <element name="integratedThermalAndTechnicalParameters" type="tns:IntegratedThermalAndTechnicalParameters"/>
+            <element name="changeInMeanBulkTemperature" type="tns:ChangeInMeanBulkTemperature"/>
+            <element name="changeInTemperatureOfWalls" type="tns:ChangeInTemperatureOfWalls"/>
+            <element name="changeInTemperatureOfSlab" type="tns:ChangeInTemperatureOfSlab"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="SubstancesOfRoom">
+        <sequence>
+            <element name="id.substancesOfRoom" type="short" />
+            <element name="fk.id.substance" type="short" />
+            <element name="fk.id.room" type="short" />
+            <element name="flammableSubstance" type="tns:FlammableSubstance"/>
+            <element name="weight" type="double"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="CoefficientSForRoom">
+        <sequence>
+            <element name="id.coefficientSForRoom" type="short" />
+            <element name="fk.id.room" type="short" />
+            <element name="s" type="double" minOccurs="6" maxOccurs="6"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ChangeInTemperatureOfSlab">
+        <sequence>
+            <element name="id.changeInTemperatureOfSlab" type="short" />
+            <element name="fk.id.room" type="short" />
+            <element name="changes" type="double" minOccurs="121" maxOccurs="121"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ChangeInTemperatureOfWalls">
+        <sequence>
+            <element name="id.changeInTemperatureOfWalls" type="short" />
+            <element name="fk.id.room" type="short" />
+            <element name="changes" type="double" minOccurs="121" maxOccurs="121"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ChangeInMeanBulkTemperature">
+        <sequence>
+            <element name="id.changeInMeanBulkTemperature" type="short" />
+            <element name="fk.id.room" type="short" />
+            <element name="changes" type="double" minOccurs="121" maxOccurs="121"/>
         </sequence>
     </complexType>
 
@@ -34,13 +101,10 @@
             <element name="maximumMeanBulkTemperature" type="double" />
             <element name="durationOfFireSurround" type="double" />
             <element name="timeReachMaximumMeanBulkTemperature" type="double" />
-            <element name="changesInMeanBulkTemperature" type="double" minOccurs="121" maxOccurs="121"/>
             <element name="maximumAverageTemperatureOfWallSurface" type="double" />
             <element name="timeToReachMaximumTemperatureOfWallSurface" type="double" />
-            <element name="changeInAverageTemperatureOfWalls" type="double" minOccurs="121" maxOccurs="121"/>
             <element name="averageMaximumTemperatureOfSlab" type="double" />
             <element name="timeToReachMaximumTemperatureOfSlabSurface" type="double" />
-            <element name="changeInAverageTemperatureOfSlab" type="double" minOccurs="121" maxOccurs="121"/>
         </sequence>
     </complexType>
 
@@ -56,17 +120,16 @@
 
     <complexType name="FlammableSubstance">
         <sequence>
+            <element name="id.substance" type="short"/>
             <element name="nameOfSubstance" type="string" />
             <element name="amountOfCombustionAir" type="double" />
             <element name="combustionHeat" type="double"/>
             <element name="averageSpeedBurnout" type="double"/>
-            <element name="weight" type="double"/>
         </sequence>
     </complexType>
 
     <complexType name="ParametersCalculatedFireLoad">
         <sequence>
-            <element name="selectedSs" type="double" minOccurs="6" maxOccurs="6"/>
             <element name="specificFireLoad" type="double" />
             <element name="specificFireLoadZVEZDOCHKA" type="double" />
             <element name="reducedHeightOfApertures" type="double" />
@@ -82,10 +145,12 @@
 
     <complexType name="Aperture">
         <sequence>
+            <element name="id.aperture" type="short"/>
+            <element name="fk.id.room" type="short"/>
             <element name="typeOfAperture" type="string" />
             <element name="width" type="double" />
             <element name="height" type="double" />
-            <element name="count" type="byte" />
+            <element name="count" type="short" />
             <element name="squareOfAperture" type="double" />
         </sequence>
     </complexType>

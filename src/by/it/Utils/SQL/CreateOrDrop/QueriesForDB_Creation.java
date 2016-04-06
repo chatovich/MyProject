@@ -14,11 +14,6 @@ public class QueriesForDB_Creation {
 
     public static void createTable(Statement statement) throws Exception {
 
-        statement.executeUpdate("CREATE TABLE `allbuildings` (\n" +
-                "  `id.allbuildings` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
-                "  `dateofbuilding` DATETIME NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
-
         statement.executeUpdate("CREATE TABLE `aperture` (\n" +
                 "  `id.aperture` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
                 "  `typeOfAperture` varchar(100) NOT NULL,\n" +
@@ -35,7 +30,7 @@ public class QueriesForDB_Creation {
                 "  `selectedTemperatureOfRegion` double NOT NULL,\n" +
                 "  `specifyingCoefficientS5` double NOT NULL,\n" +
                 "  `fk.id.user` int(11) NOT NULL,\n" +
-                "  `fk.id.allbuildings` int(11) NOT NULL\n" +
+                "  `dateofbuilding` varchar(100) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
 
@@ -119,23 +114,23 @@ public class QueriesForDB_Creation {
 
         StringBuilder sb=new StringBuilder();
         for (int i=0;i<121;i++){
-            StringBuilder sb1=new StringBuilder("`t"+i+"` double NOT NULL,\n");
+            StringBuilder sb1=new StringBuilder("`changes"+i+"` double NOT NULL,\n");
             sb.append(sb1);
         }
-        statement.executeUpdate("CREATE TABLE `changesinmeanbulktemperature` (\n" +
-                "  `id.changesinmeanbulktemperature` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
+        statement.executeUpdate("CREATE TABLE `changeinmeanbulktemperature` (\n" +
+                "  `id.changeinmeanbulktemperature` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
                     sb+
                 "  `fk.id.room` int(11) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
-        statement.executeUpdate("CREATE TABLE `changeinaveragetemperatureofwalls` (\n" +
-                "  `id.changeinaveragetemperatureofwalls` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
+        statement.executeUpdate("CREATE TABLE `changeintemperatureofwalls` (\n" +
+                "  `id.changeintemperatureofwalls` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
                 sb+
                 "  `fk.id.room` int(11) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
-        statement.executeUpdate("CREATE TABLE `changeinaveragetemperatureofslab` (\n" +
-                "  `id.changeinaveragetemperatureofslab` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
+        statement.executeUpdate("CREATE TABLE `changeintemperatureofslab` (\n" +
+                "  `id.changeintemperatureofslab` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n" +
                 sb+
                 "  `fk.id.room` int(11) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8;");
@@ -144,18 +139,18 @@ public class QueriesForDB_Creation {
  * Description of FOREIGN KEY-s
  */
 
-        statement.executeUpdate("ALTER TABLE `changesinmeanbulktemperature`\n" +
-                "  ADD CONSTRAINT `changesinmeanbulktemperature_ibfk_1` FOREIGN KEY (`fk.id.room`) REFERENCES `room` (`id.room`)" +
+        statement.executeUpdate("ALTER TABLE `changeinmeanbulktemperature`\n" +
+                "  ADD CONSTRAINT `changeinmeanbulktemperature_ibfk_1` FOREIGN KEY (`fk.id.room`) REFERENCES `room` (`id.room`)" +
                 "ON DELETE CASCADE\n" +
                 "ON UPDATE CASCADE\n");
 
-        statement.executeUpdate("ALTER TABLE `changeinaveragetemperatureofwalls`\n" +
-                "  ADD CONSTRAINT `changeinaveragetemperatureofwalls_ibfk_1` FOREIGN KEY (`fk.id.room`) REFERENCES `room` (`id.room`)" +
+        statement.executeUpdate("ALTER TABLE `changeintemperatureofwalls`\n" +
+                "  ADD CONSTRAINT `changeintemperatureofwalls_ibfk_1` FOREIGN KEY (`fk.id.room`) REFERENCES `room` (`id.room`)" +
                 "ON DELETE CASCADE\n" +
                 "ON UPDATE CASCADE\n");
 
-        statement.executeUpdate("ALTER TABLE `changeinaveragetemperatureofslab`\n" +
-                "  ADD CONSTRAINT `changeinaveragetemperatureofslab_ibfk_1` FOREIGN KEY (`fk.id.room`) REFERENCES `room` (`id.room`)" +
+        statement.executeUpdate("ALTER TABLE `changeintemperatureofslab`\n" +
+                "  ADD CONSTRAINT `changeintemperatureofslab_ibfk_1` FOREIGN KEY (`fk.id.room`) REFERENCES `room` (`id.room`)" +
                 "ON DELETE CASCADE\n" +
                 "ON UPDATE CASCADE\n");
 
@@ -166,11 +161,6 @@ public class QueriesForDB_Creation {
 
         statement.executeUpdate("ALTER TABLE `building`\n" +
                 "  ADD CONSTRAINT `building_ibfk_1` FOREIGN KEY (`fk.id.user`) REFERENCES `users` (`id.user`)\n" +
-                "ON DELETE CASCADE\n" +
-                "ON UPDATE CASCADE\n");
-
-        statement.executeUpdate("ALTER TABLE `building`\n" +
-                "  ADD CONSTRAINT `building_ibfk_2` FOREIGN KEY (`fk.id.allbuildings`) REFERENCES `allbuildings` (`id.allbuildings`)" +
                 "ON DELETE CASCADE\n" +
                 "ON UPDATE CASCADE\n");
 

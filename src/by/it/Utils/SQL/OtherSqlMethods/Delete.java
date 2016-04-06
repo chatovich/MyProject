@@ -164,18 +164,4 @@ public class Delete {
             e.printStackTrace();
         }
     }
-    public static void DelFromAllBuildings(Integer id_allbuildings){
-        try (Connection connection=
-                     DriverManager.getConnection
-                             (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
-             Statement statement=connection.createStatement()) {
-
-            statement.executeUpdate(
-                    "DELETE FROM allbuildings "+
-                            "WHERE id.allbuildings="+id_allbuildings+";");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

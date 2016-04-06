@@ -1,5 +1,7 @@
 package by.it.DAO;
 
+import by.it.DAO.RoleDAO;
+
 import java.sql.SQLException;
 
 public class User {

@@ -1,9 +1,6 @@
 package by.it.generate.functional;
 
-import by.it.generate.Aperture;
-import by.it.generate.Building;
-import by.it.generate.FlammableSubstance;
-import by.it.generate.Room;
+import by.it.generate.*;
 
 import static by.it.Utils.Rounding.myRound;
 import static java.lang.Math.*;
@@ -96,12 +93,12 @@ public class DefinitionOfParametersOfCalculatedFireLoad1 {
      */
     public Double findCoefficientС(Room myRoom){
         Double coefficientС=1.0;
-        myBuilding.getCoefficientSForBuild().set
-                (2,myBuilding.getCoefficientSForBuild().get(2)*
+        myBuilding.getCoefficientSForBuild().getS().set
+                (2,myBuilding.getCoefficientSForBuild().getS().get(2)*
                         myBuilding.getSpecifyingCoefficientS5());//нужно умножить на уточняющий коэффициент для пятого пункта
-        for (Double temp:myRoom.getParametersCalculatedFireLoad().getSelectedSs())
+        for (Double temp:myRoom.getCoefficientSForRoom().getS())
             coefficientС*=temp;
-        for (Double temp1:myBuilding.getCoefficientSForBuild())
+        for (Double temp1:myBuilding.getCoefficientSForBuild().getS())
             coefficientС*=temp1;
         return myRound(coefficientС);
     }
@@ -109,12 +106,12 @@ public class DefinitionOfParametersOfCalculatedFireLoad1 {
      * Функция нахождения удельной пожарной нагрузки
      */
     public Double findSpiSpecificFireLoad(Room myRoom){
-        if (myRoom.getFlammableSubstance().size()==0)
+        if (myRoom.getSubstancesOfRoom().size()==0)
             return myRoom.getParametersCalculatedFireLoad().getSpecificFireLoadZVEZDOCHKA();
         else {
             Double num=0.0;
-            for(FlammableSubstance temp:myRoom.getFlammableSubstance()){
-                num+=temp.getWeight()*temp.getCombustionHeat();
+            for(SubstancesOfRoom temp:myRoom.getSubstancesOfRoom()){
+                num+=temp.getWeight()*temp.getFlammableSubstance().getCombustionHeat();
             }
             return num/myRoom.getCommonParameters().getSquare();
         }

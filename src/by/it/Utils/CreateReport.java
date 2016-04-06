@@ -17,7 +17,9 @@ public class CreateReport {
     public CreateReport(Building building){
         build=building;
     }
-    public void create(MyChart chart,String filepath) throws FileNotFoundException, Docx4JException {
+    public void create(String filepath) throws Exception {
+        MyChart chart=new MyChart(build);
+        chart.outputChart();
         wordMLPackage= WordprocessingMLPackage.createPackage();
 
         TableWithMergedCells tables=new TableWithMergedCells();
@@ -25,7 +27,7 @@ public class CreateReport {
         for (Object temp:t){
             wordMLPackage.getMainDocumentPart().addObject(temp);
         }
-
+        wordMLPackage.getMainDocumentPart().addParagraph("");
         List<Object>ch=chart.imageAdd.getCharts();
         for (Object temp:ch){
             wordMLPackage.getMainDocumentPart().addObject(ch);

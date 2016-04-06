@@ -268,11 +268,13 @@ public class Update {
                      DriverManager.getConnection
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
              Statement statement=connection.createStatement()) {
+            GregorianCalendar time = new GregorianCalendar();
+            time.setTimeInMillis(System.currentTimeMillis());
             statement.executeUpdate(
                     "UPDATE building SET nameOfBuilding="+build.getNameOfBuilding()+"," +
                             "SET selectedTemperatureOfRegion="+build.getSelectedTemperatureOfRegion()+"," +
                             "SET specifyingCoefficientS5="+build.getSpecifyingCoefficientS5()+",SET fk.id.user="+id_user+"," +
-                            "SET fk.id.allbuildings="+id_allbuildings+" "+
+                            "SET fk.id.allbuildings="+id_allbuildings+" ,SET dateofbuilding="+time.get(time.HOUR_OF_DAY)+":"+time.get(time.MINUTE)+" "+time.get(time.DATE)+"-"+(time.get(time.MONTH)+1)+"-"+time.get(time.YEAR)+" "+
                             "WHERE id.building="+id_building+";");
         }
         catch (Exception e){
@@ -290,21 +292,6 @@ public class Update {
                                 "SET height="+temp.getHeight()+",SET count="+temp.getCount()+"," +
                                 "SET squareOfAperture="+temp.getSquareOfAperture()+",SET fk.id.room="+id_room+" "+
                                 "WHERE id.aperture="+id_aperture+";");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    public static void UpdToAllBuildings(Integer id_allbuildings){
-        try (Connection connection=
-                     DriverManager.getConnection
-                             (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
-             Statement statement=connection.createStatement()) {
-            GregorianCalendar time = new GregorianCalendar();
-            time.setTimeInMillis(System.currentTimeMillis());
-            statement.executeUpdate(
-                    "UPDATE aperture SET dateofbuilding="+time.get(time.HOUR_OF_DAY)+":"+time.get(time.MINUTE)+" "+time.get(time.DATE)+"-"+(time.get(time.MONTH)+1)+"-"+time.get(time.YEAR)+" "+
-                            "WHERE id.allbuildings="+id_allbuildings+";");
         }
         catch (Exception e){
             e.printStackTrace();
