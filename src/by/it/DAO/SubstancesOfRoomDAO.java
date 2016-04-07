@@ -55,6 +55,9 @@ class SubstancesOfRoomDAO extends DAO implements InterfaceDAO<SubstancesOfRoom> 
                         " values('%s','%s','%s');",
                 substance.getFkIdRoom(),substance.getFkIdSubstance(),substance.getWeight()
         );
+        FlammableSubstanceDAO fs=new FlammableSubstanceDAO();
+        fs.create(substance.getFlammableSubstance());
+
         getDAO();
         Boolean check=(0 < executeUpdate(sql));
         closeDAO();
@@ -78,6 +81,8 @@ class SubstancesOfRoomDAO extends DAO implements InterfaceDAO<SubstancesOfRoom> 
         String sql = String.format(
                 "DELETE FROM `substancesOfRoom` WHERE `id.substancesOfRoom` = %d;", substance.getIdSubstancesOfRoom()
         );
+        FlammableSubstanceDAO fs=new FlammableSubstanceDAO();
+        fs.delete(substance.getFlammableSubstance());
         getDAO();
         Boolean check=(0 < executeUpdate(sql));
         closeDAO();

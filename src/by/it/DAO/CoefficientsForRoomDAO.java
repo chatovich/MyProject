@@ -24,8 +24,14 @@ class CoefficientSForRoomDAO extends DAO implements InterfaceDAO<CoefficientSFor
                 CoefficientSForRoom ch = new CoefficientSForRoom();
                 ch.setIdCoefficientSForRoom((short) rs.getInt("id.coefficientSForRoom"));
                 ch.setFkIdRoom((short)rs.getInt("id.fk.room"));
-                for (int i=0;i<6;i++)
-                    ch.getS().add(rs.getDouble("s"+i));
+
+                ch.getS().add(rs.getDouble("s1"));
+                ch.getS().add(rs.getDouble("s4"));
+                ch.getS().add(rs.getDouble("s7"));
+                ch.getS().add(rs.getDouble("s8"));
+                ch.getS().add(rs.getDouble("s9"));
+                ch.getS().add(rs.getDouble("s10"));
+
                 changes.add(ch);
             }
         } catch (SQLException e) {
@@ -49,11 +55,8 @@ class CoefficientSForRoomDAO extends DAO implements InterfaceDAO<CoefficientSFor
     }
     @Override
     public boolean create(CoefficientSForRoom ch) throws SQLException {
-        StringBuilder sb=new StringBuilder();
-        for (int i=0;i<ch.getS().size();i++){
-            StringBuilder sb1=new StringBuilder(",`s"+i+"`");
-            sb.append(sb1);
-        }
+        StringBuilder sb=new StringBuilder(",`s1`,`s4`,`s7`,`s8`,`s9`,`s10`");
+
         StringBuilder sb1=new StringBuilder();
         for (Double temp:ch.getS()){
             StringBuilder sb2=new StringBuilder(",'"+temp+"'");
@@ -71,11 +74,10 @@ class CoefficientSForRoomDAO extends DAO implements InterfaceDAO<CoefficientSFor
     }
     @Override
     public boolean update(CoefficientSForRoom ch) throws SQLException  {
-        StringBuilder sb=new StringBuilder();
-        for (int i=0;i<ch.getS().size();i++){
-            StringBuilder sb1=new StringBuilder(",SET s"+i+"="+ch.getS().get(i));
-            sb.append(sb1);
-        }
+
+        StringBuilder sb=new StringBuilder(",SET s1="+ch.getS().get(0)+",SET s4="+ch.getS().get(1)+",SET s7="+ch.getS().get(2)
+                +",SET s8="+ch.getS().get(3)+",SET s9="+ch.getS().get(4)+",SET s10="+ch.getS().get(5));
+
         String sql = "UPDATE coefficientSForRoom SET fk.id.room="+ch.getFkIdRoom()+""+sb+" "+
                 "WHERE id.coefficientSForRoom="+ch.getIdCoefficientSForRoom()+";";
         getDAO();

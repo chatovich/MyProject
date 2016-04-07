@@ -1,5 +1,6 @@
 package by.it.DAO;
 
+import by.it.generate.Building;
 import by.it.generate.User;
 
 import java.sql.ResultSet;
@@ -24,6 +25,9 @@ class UserDAO extends DAO implements InterfaceDAO<User> {
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setAdmin(rs.getBoolean("admin"));
+                //заодно и здания добавим
+                BuildingDAO b=new BuildingDAO();
+                user.getBuilding().addAll(b.getAll("fk.id.user="+user.getIdUser()));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -52,6 +56,11 @@ class UserDAO extends DAO implements InterfaceDAO<User> {
                         " values('%s','%s','%s',"+user.isAdmin()+");",
                 user.getLogin(), user.getPassword(), user.getEmail()
         );
+        BuildingDAO b=new BuildingDAO();
+        List<Building> buildings=user.getBuilding();
+        for (Building temp:buildings){
+            b.create(temp);
+        }
         getDAO();
         Boolean check=(0 < executeUpdate(sql));
         closeDAO();
@@ -74,6 +83,11 @@ class UserDAO extends DAO implements InterfaceDAO<User> {
         String sql = String.format(
                 "DELETE FROM `users` WHERE `id.user` = %d;", user.getIdUser()
         );
+        BuildingDAO b=new BuildingDAO();
+        List<Building> buildings=b.getAll("fk.id.user="+user.getIdUser());
+        for (Building temp:buildings){
+            b.delete(temp);
+        }
         getDAO();
         Boolean check=(0 < executeUpdate(sql));
         closeDAO();

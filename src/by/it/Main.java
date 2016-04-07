@@ -1,5 +1,6 @@
 package by.it;
 
+import by.it.DAO.BuildingDAO;
 import by.it.Utils.CreateReport;
 import by.it.Utils.MyChart;
 import by.it.generate.*;
@@ -58,17 +59,17 @@ public class Main {
         all.setALlParemeters(b);
         MyChart m=new MyChart(b);
         m.outputChart();
-        List<Double> res=r.getChangeInMeanBulkTemperature().getChanges();
-        for (Double temp:res)
-            System.out.print(temp+" ");
-        System.out.println();
-        List<Double> res1=r.getChangeInTemperatureOfSlab().getChanges();
-        for (Double temp:res1)
-            System.out.print(temp+" ");System.out.println();
-        List<Double> res2=r.getChangeInTemperatureOfWalls().getChanges();
-        for (Double temp:res2)
-            System.out.print(temp+" ");
         CreateReport create=new CreateReport(b);
-        create.create("/src/by/it/ProgramCreate/Hey.docx");//////////беда с маршалом
+        create.create("/src/by/it/ProgramCreate/Hey.docx");
+        b.setFkIdUser((short) 1);
+        b.getRoom().get(0).setFkIdBuilding((short) 1);
+        b.getCoefficientSForBuild().setFkIdBuilding((short)1);
+        b.getRoom().get(0).getCoefficientSForRoom().setFkIdRoom((short)1);
+        b.getRoom().get(0).getChangeInMeanBulkTemperature().setFkIdRoom((short)1);
+        b.getRoom().get(0).getChangeInTemperatureOfSlab().setFkIdRoom((short)1);
+        b.getRoom().get(0).getChangeInTemperatureOfWalls().setFkIdRoom((short)1);
+        b.getRoom().get(0).getAperture().get(0).setFkIdRoom((short)1);
+        BuildingDAO dao=new BuildingDAO();
+        dao.create(b);
     }
 }

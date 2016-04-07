@@ -20,18 +20,18 @@ public class CreateReport {
     public void create(String filepath) throws Exception {
         MyChart chart=new MyChart(build);
         chart.outputChart();
-        wordMLPackage= WordprocessingMLPackage.createPackage();
 
         TableWithMergedCells tables=new TableWithMergedCells();
         List<Object> t=tables.createTables(build);
         for (Object temp:t){
-            wordMLPackage.getMainDocumentPart().addObject(temp);
+            chart.getImageAdd().wordMLPackage.getMainDocumentPart().addObject(temp);
         }
-        wordMLPackage.getMainDocumentPart().addParagraph("");
-        List<Object>ch=chart.imageAdd.getCharts();
+
+
+       /* List<Object>ch=chart.imageAdd.getCharts();
         for (Object temp:ch){
             wordMLPackage.getMainDocumentPart().addObject(ch);
-        }
-        wordMLPackage.save(new java.io.File(System.getProperty("user.dir") + filepath) );
+        }*/
+        chart.getImageAdd().wordMLPackage.save(new java.io.File(System.getProperty("user.dir") + filepath) );
     }
 }

@@ -53,6 +53,7 @@ class RoomDAO extends DAO implements InterfaceDAO<Room> {
                 room.getIntegratedThermalAndTechnicalParameters().setTimeToReachMaximumTemperatureOfSlabSurface(rs.getDouble("timeToReachMaximumTemperatureOfSlabSurface"));
                 room.setFkIdBuilding(rs.getShort("fk.id.building"));
 
+                //добавляем и все внутренности
                 SubstancesOfRoomDAO s=new SubstancesOfRoomDAO();
                 List<SubstancesOfRoom> sr=s.getAll("fk.id.room="+room.getIdRoom());
                 room.getSubstancesOfRoom().addAll(sr);
@@ -72,7 +73,7 @@ class RoomDAO extends DAO implements InterfaceDAO<Room> {
 
                 ChangeSlabTDAO ch2=new ChangeSlabTDAO();
                 room.setChangeInTemperatureOfSlab(ch2.getAll("fk.id.room="+room.getIdRoom()).get(0));
-//здесь вызвать такую же функцию для проемов, и остальных коэффициентов
+
                 rooms.add(room);
             }
         } catch (SQLException e) {
@@ -124,6 +125,33 @@ class RoomDAO extends DAO implements InterfaceDAO<Room> {
                         r.getIntegratedThermalAndTechnicalParameters().getTimeToReachMaximumTemperatureOfWallSurface()+"','"+
                         r.getIntegratedThermalAndTechnicalParameters().getAverageMaximumTemperatureOfSlab()+"','"+
                         r.getIntegratedThermalAndTechnicalParameters().getTimeToReachMaximumTemperatureOfSlabSurface()+"','"+r.getFkIdBuilding()+"');");
+
+        //заодно создадим коэффициенты
+        CoefficientSForRoomDAO cf=new CoefficientSForRoomDAO();
+        cf.create(r.getCoefficientSForRoom());
+        //также создадим и помещения
+        ApertureDAO ap=new ApertureDAO();
+        List<Aperture> apertures=r.getAperture();
+        for (Aperture temp:apertures){
+            ap.create(temp);
+        }
+        //и остальное
+        ChangeMeanBulkTDAO ch=new ChangeMeanBulkTDAO();
+        ch.create(r.getChangeInMeanBulkTemperature());
+
+        ChangeWallsTDAO ch1=new ChangeWallsTDAO();
+        ch1.create(r.getChangeInTemperatureOfWalls());
+
+        ChangeSlabTDAO ch2=new ChangeSlabTDAO();
+        ch2.create(r.getChangeInTemperatureOfSlab());
+
+
+        SubstancesOfRoomDAO s=new SubstancesOfRoomDAO();
+        List<SubstancesOfRoom> sr=r.getSubstancesOfRoom();
+        for (SubstancesOfRoom temp:sr){
+            s.create(temp);
+        }
+
         getDAO();
         Boolean check=(0 < executeUpdate(sql));
         closeDAO();
@@ -168,9 +196,32 @@ class RoomDAO extends DAO implements InterfaceDAO<Room> {
     }
     @Override
     public boolean delete(Room r) throws SQLException  {
-        String sql = String.format(
-                "DELETE FROM users "+
-                        "WHERE id.user="+r.getIdRoom()+";");
+        String sql ="DELETE FROM users WHERE id.user="+r.getIdRoom()+";";
+        //заодно удалим коэффициенты
+        CoefficientSForRoomDAO cf=new CoefficientSForRoomDAO();
+        cf.delete(r.getCoefficientSForRoom());
+        //также удалим и помещения
+        ApertureDAO ap=new ApertureDAO();
+        List<Aperture> apertures=ap.getAll("fk.id.room="+r.getIdRoom());
+        for (Aperture temp:apertures){
+            ap.delete(temp);
+        }
+        //и остального
+        ChangeMeanBulkTDAO ch=new ChangeMeanBulkTDAO();
+        ch.delete(r.getChangeInMeanBulkTemperature());
+
+        ChangeWallsTDAO ch1=new ChangeWallsTDAO();
+        ch1.delete(r.getChangeInTemperatureOfWalls());
+
+        ChangeSlabTDAO ch2=new ChangeSlabTDAO();
+        ch2.delete(r.getChangeInTemperatureOfSlab());
+
+        SubstancesOfRoomDAO s=new SubstancesOfRoomDAO();
+        List<SubstancesOfRoom> sr=s.getAll("fk.id.room="+r.getIdRoom());
+        for (SubstancesOfRoom temp:sr){
+            s.delete(temp);
+        }
+
         getDAO();
         Boolean check=(0 < executeUpdate(sql));
         closeDAO();

@@ -27,14 +27,19 @@ import java.util.*;
 public class MyChart {
     Building myBuilding;
     ArrayList<String> imageNames=new ArrayList<>();
-    WordprocessingMLPackage wordMLPackage;
-    public ImageAdd imageAdd;
+    private ImageAdd imageAdd;
+
     public MyChart(Building build) throws FileNotFoundException {
         myBuilding=build;
     }
+
+    public ImageAdd getImageAdd(){
+        return imageAdd;
+    }
+
     public void outputChart() throws Exception {
         imageAdd=new ImageAdd();
-        wordMLPackage= WordprocessingMLPackage.createPackage();
+
         int i=0;
         for (Room temp:myBuilding.getRoom()){
             createImage(createChart(createDataset(temp),temp),i);//создаем изображения для каждого помещения

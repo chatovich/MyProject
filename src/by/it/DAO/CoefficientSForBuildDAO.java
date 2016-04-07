@@ -22,10 +22,14 @@ public class CoefficientSForBuildDAO extends DAO implements InterfaceDAO<Coeffic
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 CoefficientSForBuild ch = new CoefficientSForBuild();
-                ch.setIdCoefficientSForBuild((short) rs.getInt("id.coefficientSForBuild"));
+                ch.setIdCoefficientSForBuild((short) rs.getInt("id.coefficientSForBuilding"));
                 ch.setFkIdBuilding((short)rs.getInt("id.fk.boom"));
-                for (int i=0;i<4;i++)
-                    ch.getS().add(rs.getDouble("s"+i));
+
+                ch.getS().add(rs.getDouble("s2"));
+                ch.getS().add(rs.getDouble("s3"));
+                ch.getS().add(rs.getDouble("s5"));
+                ch.getS().add(rs.getDouble("s6"));
+
                 changes.add(ch);
             }
         } catch (SQLException e) {
@@ -41,7 +45,7 @@ public class CoefficientSForBuildDAO extends DAO implements InterfaceDAO<Coeffic
 
     @Override
     public CoefficientSForBuild read(int id) {
-        List<CoefficientSForBuild> changes = getAll("WHERE id.coefficientSForBuild=" + id + " LIMIT 0,1");
+        List<CoefficientSForBuild> changes = getAll("WHERE id.coefficientSForBuilding=" + id + " LIMIT 0,1");
         if (changes.size() > 0) {
             return changes.get(0);
         } else
@@ -49,18 +53,16 @@ public class CoefficientSForBuildDAO extends DAO implements InterfaceDAO<Coeffic
     }
     @Override
     public boolean create(CoefficientSForBuild ch) throws SQLException {
-        StringBuilder sb=new StringBuilder();
-        for (int i=0;i<ch.getS().size();i++){
-            StringBuilder sb1=new StringBuilder(",`s"+i+"`");
-            sb.append(sb1);
-        }
+
+        StringBuilder sb=new StringBuilder(",`s2`,`s3`,`s5`,`s6`");
+
         StringBuilder sb1=new StringBuilder();
         for (Double temp:ch.getS()){
             StringBuilder sb2=new StringBuilder(",'"+temp+"'");
             sb1.append(sb2);
         }
         String sql =
-                "INSERT INTO coefficientSForBuild (`fk.id.boom`"+sb+") "+
+                "INSERT INTO coefficientSForBuilding (`fk.id.Building`"+sb+") "+
                         "VALUES ('"+ch.getFkIdBuilding()+"'"+sb1+");";
 
         getDAO();
@@ -71,13 +73,12 @@ public class CoefficientSForBuildDAO extends DAO implements InterfaceDAO<Coeffic
     }
     @Override
     public boolean update(CoefficientSForBuild ch) throws SQLException  {
-        StringBuilder sb=new StringBuilder();
-        for (int i=0;i<ch.getS().size();i++){
-            StringBuilder sb1=new StringBuilder(",SET s"+i+"="+ch.getS().get(i));
-            sb.append(sb1);
-        }
-        String sql = "UPDATE coefficientSForBuild SET fk.id.build="+ch.getFkIdBuilding()+""+sb+" "+
-                "WHERE id.coefficientSForBuild="+ch.getIdCoefficientSForBuild()+";";
+
+        StringBuilder sb=new StringBuilder(",SET s2="+ch.getS().get(0)+",SET s3="+ch.getS().get(1)+",SET s5="+ch.getS().get(2)
+            +",SET s6="+ch.getS().get(3));
+
+        String sql = "UPDATE coefficientSForBuilding SET fk.id.building="+ch.getFkIdBuilding()+""+sb+" "+
+                "WHERE id.coefficientSForBuilding="+ch.getIdCoefficientSForBuild()+";";
         getDAO();
         Boolean check=(0 < executeUpdate(sql));
         closeDAO();
@@ -85,8 +86,8 @@ public class CoefficientSForBuildDAO extends DAO implements InterfaceDAO<Coeffic
     }
     @Override
     public boolean delete(CoefficientSForBuild ch) throws SQLException  {
-        String sql = "DELETE FROM coefficientSForBuild "+
-                "WHERE id.coefficientSForBuild="+ch.getIdCoefficientSForBuild()+";";
+        String sql = "DELETE FROM coefficientSForBuilding "+
+                "WHERE id.coefficientSForBuilding="+ch.getIdCoefficientSForBuild()+";";
 
         getDAO();
         Boolean check=(0 < executeUpdate(sql));

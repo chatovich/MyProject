@@ -10,9 +10,7 @@ import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.BinaryPartAbstractImage;
 
 /**
- * Examples of adding images to a docx
- *
- * @author Jason Harrop
+ * adding images to a docx
  */
 public class ImageAdd {
     WordprocessingMLPackage wordMLPackage;
@@ -75,13 +73,10 @@ public class ImageAdd {
         wordMLPackage.getMainDocumentPart().addObject(p3);*/
 
 
-        // Now save it
-
-
     }
    // public static void inputImage
     /**
-     * Create image, without specifying width
+     * Create image, without specifying width. FOR DOCX
      */
     public static org.docx4j.wml.P newImage( WordprocessingMLPackage wordMLPackage,
                                              byte[] bytes,

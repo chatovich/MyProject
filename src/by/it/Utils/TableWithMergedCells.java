@@ -7,6 +7,7 @@ import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.wml.*;
 
+import javax.xml.bind.JAXBException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class TableWithMergedCells {
      *  We create a table with borders and add four rows with content to it,
      *  and then we add the table to the document and save it.
      */
-    public List<Object> createTables (Building build) throws Docx4JException {
+    public List<Object> createTables (Building build) throws Docx4JException, JAXBException {
         wordMLPackage = WordprocessingMLPackage.createPackage();
         factory = Context.getWmlObjectFactory();
         Tbl table1=firstTable(build);
@@ -34,12 +35,19 @@ public class TableWithMergedCells {
         Tbl table7=seventhTable(build);
 
         wordMLPackage.getMainDocumentPart().addObject(table1);
+        wordMLPackage.getMainDocumentPart().addParagraphOfText("\n");
         wordMLPackage.getMainDocumentPart().addObject(table2);
+        wordMLPackage.getMainDocumentPart().addParagraphOfText("\n");
         wordMLPackage.getMainDocumentPart().addObject(table3);
+        wordMLPackage.getMainDocumentPart().addParagraphOfText("\n");
         wordMLPackage.getMainDocumentPart().addObject(table4);
+        wordMLPackage.getMainDocumentPart().addParagraphOfText("\n");
         wordMLPackage.getMainDocumentPart().addObject(table5);
+        wordMLPackage.getMainDocumentPart().addParagraphOfText("\n");
         wordMLPackage.getMainDocumentPart().addObject(table6);
+        wordMLPackage.getMainDocumentPart().addParagraphOfText("\n");
         wordMLPackage.getMainDocumentPart().addObject(table7);
+        wordMLPackage.getMainDocumentPart().addParagraphOfText("\n");
 
         //wordMLPackage.save(new java.io.File("src/by/it/ProgramCreate/HelloWord9.docx") );
         return wordMLPackage.getMainDocumentPart().getContent();
@@ -282,7 +290,6 @@ public class TableWithMergedCells {
             temp.add(String.valueOf(room.getDetermineTheTypeOfFire().getProemnostOfRoom()));
             temp.add(String.valueOf(room.getDetermineTheTypeOfFire().getSpecificCriticalAmountOfFireLoad()));
             temp.add(String.valueOf(room.getDetermineTheTypeOfFire().getSpecificValueOfFireLoad()));
-            temp.add(String.valueOf(room.getParametersCalculatedFireLoad().getCoefficientS()));
             if (room.getDetermineTheTypeOfFire().isPRN()){
                 temp.add("ПРН");
             }else temp.add("ПРВ");
