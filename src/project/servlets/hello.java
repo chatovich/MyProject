@@ -9,10 +9,19 @@ import java.io.PrintWriter;
 
 public class hello extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.println("Hello world");
-        out.flush(); //ВАЖНО! Иначе вывод будет неустойчивым...
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String username = (String) request.getParameter("username");
+        username = username.toUpperCase();
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().println("<!DOCTYPE HTML>");
+        response.getWriter().println("<html><body><p>" + username + "</p></body></html>");
+        response.getWriter().flush(); //ВАЖНО! Иначе вывод будет неустойчивым...
+
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request,response);
 
     }
 }
