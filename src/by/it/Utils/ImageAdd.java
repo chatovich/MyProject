@@ -13,16 +13,8 @@ import org.docx4j.openpackaging.parts.WordprocessingML.BinaryPartAbstractImage;
  * adding images to a docx
  */
 public class ImageAdd {
-    WordprocessingMLPackage wordMLPackage;
 
-    public ImageAdd() throws InvalidFormatException {
-        wordMLPackage= WordprocessingMLPackage.createPackage();
-    }
-    public List<Object> getCharts(){
-        return wordMLPackage.getMainDocumentPart().getContent();
-    }
-
-    public void chartToReport(String filepath) throws Exception {
+    public void chartToReport(WordprocessingMLPackage wordMLPackage,String filepath) throws Exception {
 
         // The image to add
         File file = new File(System.getProperty("user.dir")+"/"

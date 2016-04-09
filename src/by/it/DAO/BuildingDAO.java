@@ -66,7 +66,6 @@ public class BuildingDAO extends DAO implements InterfaceDAO<Building>  {
                         " values('%s','%s','%s','%s','%s');",
                 building.getFkIdUser(),building.getNameOfBuilding(),building.getSelectedTemperatureOfRegion(),
                 building.getSpecifyingCoefficientS5(),"созд.: "+building.getDateOfBuilding()
-
         );
         //заодно вставим коэффициенты
         CoefficientSForBuildDAO cf=new CoefficientSForBuildDAO();

@@ -14,24 +14,27 @@ public class CreateReport {
     Building build;
     private WordprocessingMLPackage wordMLPackage;
 
+    public WordprocessingMLPackage getWordMLPackage(){
+        return wordMLPackage;
+    }
     public CreateReport(Building building){
         build=building;
     }
     public void create(String filepath) throws Exception {
-        MyChart chart=new MyChart(build);
-        chart.outputChart();
+        wordMLPackage= WordprocessingMLPackage.createPackage();
 
         TableWithMergedCells tables=new TableWithMergedCells();
         List<Object> t=tables.createTables(build);
         for (Object temp:t){
-            chart.getImageAdd().wordMLPackage.getMainDocumentPart().addObject(temp);
+            wordMLPackage.getMainDocumentPart().addObject(temp);
         }
-
+        MyChart chart=new MyChart(build);
+        chart.outputChart(wordMLPackage);
 
        /* List<Object>ch=chart.imageAdd.getCharts();
         for (Object temp:ch){
             wordMLPackage.getMainDocumentPart().addObject(ch);
         }*/
-        chart.getImageAdd().wordMLPackage.save(new java.io.File(System.getProperty("user.dir") + filepath) );
+        wordMLPackage.save(new java.io.File(System.getProperty("user.dir") + filepath) );
     }
 }

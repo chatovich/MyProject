@@ -28,6 +28,7 @@ public class MyChart {
     Building myBuilding;
     ArrayList<String> imageNames=new ArrayList<>();
     private ImageAdd imageAdd;
+    WordprocessingMLPackage wordMLPackage;
 
     public MyChart(Building build) throws FileNotFoundException {
         myBuilding=build;
@@ -37,9 +38,9 @@ public class MyChart {
         return imageAdd;
     }
 
-    public void outputChart() throws Exception {
+    public void outputChart(WordprocessingMLPackage wordMLPackage) throws Exception {
         imageAdd=new ImageAdd();
-
+        this.wordMLPackage=wordMLPackage;
         int i=0;
         for (Room temp:myBuilding.getRoom()){
             createImage(createChart(createDataset(temp),temp),i);//создаем изображения для каждого помещения
@@ -147,7 +148,7 @@ public class MyChart {
         writer.close();
     }
 
-    private void createImage(JFreeChart chart, int i) throws Exception {
+    private boolean createImage(JFreeChart chart, int i) throws Exception {
         final ChartRenderingInfo info=new ChartRenderingInfo(new StandardEntityCollection());
         String fileName="Chart"+i+".png";
         String filepath="src/by/it/ProgramCreate/";
@@ -155,6 +156,8 @@ public class MyChart {
         final File file=new File(filepath+fileName);
         ChartUtilities.saveChartAsPNG(file,chart,600,400,info);
 
-        imageAdd.chartToReport(filepath+fileName);//заодно закидываем в список объектов для отчёта
+        imageAdd.chartToReport(wordMLPackage,filepath+fileName);//заодно закидываем в список объектов для отчёта
+
+        return file.delete();
     }
 }

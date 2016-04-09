@@ -57,8 +57,6 @@ public class Main {
         f.setWeight(32);*/
         AllDefinition all=new AllDefinition();
         all.setALlParemeters(b);
-        MyChart m=new MyChart(b);
-        m.outputChart();
         CreateReport create=new CreateReport(b);
         create.create("/src/by/it/ProgramCreate/Hey.docx");
         b.setFkIdUser((short) 1);
@@ -70,6 +68,6 @@ public class Main {
         b.getRoom().get(0).getChangeInTemperatureOfWalls().setFkIdRoom((short)1);
         b.getRoom().get(0).getAperture().get(0).setFkIdRoom((short)1);
         BuildingDAO dao=new BuildingDAO();
-        dao.create(b);
+        //dao.create(b);
     }
 }
